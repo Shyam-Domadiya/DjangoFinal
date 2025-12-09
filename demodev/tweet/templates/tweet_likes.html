@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+
+{% block title %}Tweet Likes{% endblock %}
+
+{% block content %}
+<style>
+    .likes-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .likes-header {
+        margin-bottom: 30px;
+    }
+
+    .likes-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .tweet-preview {
+        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 30px;
+        color: #8b949e;
+        font-size: 14px;
+    }
+
+    .likes-list {
+        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .like-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        border-bottom: 1px solid #30363d;
+        transition: background-color 0.2s;
+    }
+
+    .like-item:last-child {
+        border-bottom: none;
+    }
+
+    .like-item:hover {
+        background-color: rgba(88, 166, 255, 0.05);
+    }
+
+    .like-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #58a6ff 0%, #1f6feb 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .like-user-info h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #c9d1d9;
+    }
+
+    .like-user-info p {
+        margin: 4px 0 0 0;
+        font-size: 13px;
+        color: #8b949e;
+    }
+
+    .back-btn {
+        display: inline-block;
+        color: #58a6ff;
+        text-decoration: none;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .back-btn:hover {
+        color: #79c0ff;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #8b949e;
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
+    }
+</style>
+
+<div class="likes-container">
+    <a href="{% url 'tweet_detail' tweet.id %}" class="back-btn">
+        <i class="bi bi-arrow-left"></i> Back to Tweet
+    </a>
+
+    <div class="likes-header">
+        <h1><i class="bi bi-heart-fill" style="color: #f85149;"></i> Liked by {{ likes.count }} user{{ likes.count|pluralize }}</h1>
+    </div>
+
+    <div class="tweet-preview">
+        <strong>{{ tweet.user.username }}:</strong> {{ tweet.text|truncatewords:20 }}
+    </div>
+
+    <div class="likes-list">
+        {% if likes %}
+            {% for like in likes %}
+                <div class="like-item">
+                    <div class="like-avatar">
+                        {{ like.user.username|first|upper }}
+                    </div>
+                    <div class="like-user-info">
+                        <h3>{{ like.user.username }}</h3>
+                        <p>@{{ like.user.username|lower }} • Liked {{ like.created_at|timesince }} ago</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <i class="bi bi-heart"></i>
+                <p>No likes yet. Be the first to like this tweet!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

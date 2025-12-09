@@ -174,6 +174,19 @@
         border-color: #ff7b72;
     }
 
+    .tweet-action-btn.like-btn {
+        border-color: #f85149;
+        color: #f85149;
+    }
+
+    .tweet-action-btn.like-btn:hover {
+        background-color: rgba(248, 81, 73, 0.1);
+    }
+
+    .tweet-action-btn.like-btn.liked {
+        background-color: rgba(248, 81, 73, 0.2);
+    }
+
     .empty-state {
         text-align: center;
         padding: 60px 20px;
@@ -230,7 +243,7 @@
     {% if tweets %}
         <div class="tweets-grid">
             {% for tweet in tweets %}
-                <div class="tweet-card">
+                <div class="tweet-card" data-tweet-id="{{ tweet.id }}">
                     {% if tweet.photo %}
                         <img src="{{tweet.photo.url}}" alt="Tweet image" class="tweet-image">
                     {% else %}
@@ -252,16 +265,33 @@
                         
                         <p class="tweet-text">{{ tweet.text }}</p>
                         
-                        {% if user.is_authenticated and user == tweet.user %}
-                            <div class="tweet-actions">
+                        <div style="color: #8b949e; font-size: 12px; margin-bottom: 8px; display: flex; gap: 16px;">
+                            <span>
+                                <i class="bi bi-chat"></i> {{ tweet.comments.count }} comment{{ tweet.comments.count|pluralize }}
+                            </span>
+                            <span>
+                                <i class="bi bi-heart"></i> {{ tweet.like_count }} like{{ tweet.like_count|pluralize }}
+                            </span>
+                        </div>
+                        
+                        <div class="tweet-actions">
+                            {% if user.is_authenticated %}
+                                <button onclick="toggleLike({{ tweet.id }}, this)" class="tweet-action-btn like-btn {% if tweet.user_has_liked %}liked{% endif %}" style="border-color: #f85149; color: #f85149;">
+                                    <i class="bi bi-heart{% if tweet.user_has_liked %}-fill{% endif %}"></i> <span class="like-count">{{ tweet.like_count }}</span>
+                                </button>
+                            {% endif %}
+                            <a href="{% url 'tweet_detail' tweet.id %}" class="tweet-action-btn" style="border-color: #58a6ff; color: #58a6ff;">
+                                <i class="bi bi-chat-dots"></i> View
+                            </a>
+                            {% if user.is_authenticated and user == tweet.user %}
                                 <a href="{% url 'tweet_edit' tweet.id %}" class="tweet-action-btn edit">
                                     <i class="bi bi-pencil"></i> Edit
                                 </a>
-                                <a href="{% url 'tweet_delete' tweet.id %}" class="tweet-action-btn delete">
+                                <button onclick="return deleteTweet({{ tweet.id }})" class="tweet-action-btn delete">
                                     <i class="bi bi-trash"></i> Delete
-                                </a>
-                            </div>
-                        {% endif %}
+                                </button>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

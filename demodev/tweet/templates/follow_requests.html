@@ -11,9 +11,6 @@
     }
 
     .requests-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         margin-bottom: 40px;
         padding-bottom: 20px;
         border-bottom: 2px solid #30363d;
@@ -102,29 +99,23 @@
     }
 
     .action-btn.reject {
-        background-color: transparent;
-        border: 1px solid #f85149;
-        color: #f85149;
+        background-color: #f85149;
+        color: white;
     }
 
     .action-btn.reject:hover {
-        background-color: rgba(248, 81, 73, 0.1);
+        background-color: #ff7b72;
     }
 
     .empty-state {
         text-align: center;
         padding: 60px 20px;
-    }
-
-    .empty-state-icon {
-        font-size: 48px;
-        color: #30363d;
-        margin-bottom: 16px;
-    }
-
-    .empty-state-text {
-        font-size: 16px;
         color: #8b949e;
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 16px;
     }
 </style>
 
@@ -134,23 +125,23 @@
     </div>
 
     {% if pending_requests %}
-        {% for follow in pending_requests %}
+        {% for request in pending_requests %}
             <div class="request-card">
                 <div class="request-info">
                     <div class="request-avatar">
-                        {{ follow.follower.username|first|upper }}
+                        {{ request.follower.username|first|upper }}
                     </div>
                     <div class="request-details">
-                        <h3>{{ follow.follower.username }}</h3>
-                        <p>@{{ follow.follower.username|lower }} wants to follow you</p>
+                        <h3>{{ request.follower.username }}</h3>
+                        <p>@{{ request.follower.username|lower }} wants to follow you</p>
                     </div>
                 </div>
                 
                 <div class="request-actions">
-                    <a href="{% url 'accept_follow_request' follow.id %}" class="action-btn accept">
+                    <a href="{% url 'accept_follow_request' request.id %}" class="action-btn accept">
                         <i class="bi bi-check-circle"></i> Accept
                     </a>
-                    <a href="{% url 'reject_follow_request' follow.id %}" class="action-btn reject">
+                    <a href="{% url 'reject_follow_request' request.id %}" class="action-btn reject">
                         <i class="bi bi-x-circle"></i> Reject
                     </a>
                 </div>
@@ -158,10 +149,8 @@
         {% endfor %}
     {% else %}
         <div class="empty-state">
-            <div class="empty-state-icon">
-                <i class="bi bi-inbox"></i>
-            </div>
-            <p class="empty-state-text">No pending follow requests</p>
+            <i class="bi bi-inbox"></i>
+            <p>No pending follow requests.</p>
         </div>
     {% endif %}
 </div>

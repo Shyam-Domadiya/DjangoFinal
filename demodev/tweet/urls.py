@@ -15,6 +15,11 @@ urlpatterns = [
     path('follow/<int:user_id>/', views.send_follow_request, name='send_follow_request'),
     path('unfollow/<int:user_id>/', views.unfollow_user, name='unfollow_user'),
     path('follow-requests/', views.follow_requests, name='follow_requests'),
-    path('accept-follow/<int:follow_id>/', views.accept_follow_request, name='accept_follow_request'),
-    path('reject-follow/<int:follow_id>/', views.reject_follow_request, name='reject_follow_request'),
+    path('accept-follow/<int:request_id>/', views.accept_follow_request, name='accept_follow_request'),
+    path('reject-follow/<int:request_id>/', views.reject_follow_request, name='reject_follow_request'),
+    path('tweet/<int:tweet_id>/', views.tweet_detail, name='tweet_detail'),
+    path('tweet/<int:tweet_id>/comment/add/', views.add_comment_ajax, name='add_comment_ajax'),
+    path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
+    path('tweet/<int:tweet_id>/like/', views.toggle_like, name='toggle_like'),
+    path('tweet/<int:tweet_id>/likes/', views.tweet_likes, name='tweet_likes'),
 ]

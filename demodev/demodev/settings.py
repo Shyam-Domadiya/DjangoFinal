@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+m5@#q)f6krcg336u6jcx!45c7d*xqdr@%w65wvhq_c7deqb2%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -125,3 +125,6 @@ LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = '/tweets/'
 LOGOUT_REDIRECT_URL = '/tweets/'
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
