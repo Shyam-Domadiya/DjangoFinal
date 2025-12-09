@@ -56,7 +56,7 @@ ROOT_URLCONF = 'demodev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'demodev', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +121,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = '/tweets/'
+LOGOUT_REDIRECT_URL = '/tweets/'
