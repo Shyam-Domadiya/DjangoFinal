@@ -11,4 +11,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('users/', views.user_list, name='user_list'),
+    path('follow/<int:user_id>/', views.send_follow_request, name='send_follow_request'),
+    path('unfollow/<int:user_id>/', views.unfollow_user, name='unfollow_user'),
+    path('follow-requests/', views.follow_requests, name='follow_requests'),
+    path('accept-follow/<int:follow_id>/', views.accept_follow_request, name='accept_follow_request'),
+    path('reject-follow/<int:follow_id>/', views.reject_follow_request, name='reject_follow_request'),
 ]

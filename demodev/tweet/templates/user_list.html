@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+
+{% block title %}Users{% endblock %}
+
+{% block content %}
+<style>
+    .users-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .users-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #30363d;
+    }
+
+    .users-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+        color: #ffffff;
+    }
+
+    .user-card {
+        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .user-card:hover {
+        border-color: #58a6ff;
+        box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #58a6ff 0%, #1f6feb 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .user-details h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #c9d1d9;
+    }
+
+    .user-details p {
+        margin: 4px 0 0 0;
+        font-size: 14px;
+        color: #8b949e;
+    }
+
+    .follow-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: none;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .follow-btn.primary {
+        background-color: #238636;
+        color: white;
+    }
+
+    .follow-btn.primary:hover {
+        background-color: #2ea043;
+    }
+
+    .follow-btn.secondary {
+        background-color: transparent;
+        border: 1px solid #f85149;
+        color: #f85149;
+    }
+
+    .follow-btn.secondary:hover {
+        background-color: rgba(248, 81, 73, 0.1);
+    }
+
+    .follow-btn.pending {
+        background-color: #6e7681;
+        color: white;
+        cursor: not-allowed;
+    }
+
+    .follow-btn.following {
+        background-color: transparent;
+        border: 1px solid #58a6ff;
+        color: #58a6ff;
+    }
+
+    .follow-btn.following:hover {
+        background-color: rgba(88, 166, 255, 0.1);
+    }
+</style>
+
+<div class="users-container">
+    <div class="users-header">
+        <h1><i class="bi bi-people"></i> Users</h1>
+    </div>
+
+    {% if users %}
+        {% for user in users %}
+            <div class="user-card">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {{ user.username|first|upper }}
+                    </div>
+                    <div class="user-details">
+                        <h3>{{ user.username }}</h3>
+                        <p>@{{ user.username|lower }}</p>
+                    </div>
+                </div>
+                
+                <div>
+                    {% if user.follow_status == 'none' %}
+                        <a href="{% url 'send_follow_request' user.id %}" class="follow-btn primary">
+                            <i class="bi bi-person-plus"></i> Follow
+                        </a>
+                    {% elif user.follow_status == 'pending' %}
+                        <span class="follow-btn pending">
+                            <i class="bi bi-clock"></i> Pending
+                        </span>
+                    {% elif user.follow_status == 'accepted' %}
+                        <a href="{% url 'unfollow_user' user.id %}" class="follow-btn secondary">
+                            <i class="bi bi-person-dash"></i> Unfollow
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align: center; color: #8b949e; padding: 40px;">No other users found.</p>
+    {% endif %}
+</div>
+{% endblock %}

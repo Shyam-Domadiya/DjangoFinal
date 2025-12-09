@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+
+{% block title %}Follow Requests{% endblock %}
+
+{% block content %}
+<style>
+    .requests-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .requests-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #30363d;
+    }
+
+    .requests-header h1 {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+        color: #ffffff;
+    }
+
+    .request-card {
+        background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .request-card:hover {
+        border-color: #58a6ff;
+        box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+    }
+
+    .request-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .request-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #58a6ff 0%, #1f6feb 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .request-details h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #c9d1d9;
+    }
+
+    .request-details p {
+        margin: 4px 0 0 0;
+        font-size: 14px;
+        color: #8b949e;
+    }
+
+    .request-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .action-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: none;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .action-btn.accept {
+        background-color: #238636;
+        color: white;
+    }
+
+    .action-btn.accept:hover {
+        background-color: #2ea043;
+    }
+
+    .action-btn.reject {
+        background-color: transparent;
+        border: 1px solid #f85149;
+        color: #f85149;
+    }
+
+    .action-btn.reject:hover {
+        background-color: rgba(248, 81, 73, 0.1);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .empty-state-icon {
+        font-size: 48px;
+        color: #30363d;
+        margin-bottom: 16px;
+    }
+
+    .empty-state-text {
+        font-size: 16px;
+        color: #8b949e;
+    }
+</style>
+
+<div class="requests-container">
+    <div class="requests-header">
+        <h1><i class="bi bi-person-check"></i> Follow Requests</h1>
+    </div>
+
+    {% if pending_requests %}
+        {% for follow in pending_requests %}
+            <div class="request-card">
+                <div class="request-info">
+                    <div class="request-avatar">
+                        {{ follow.follower.username|first|upper }}
+                    </div>
+                    <div class="request-details">
+                        <h3>{{ follow.follower.username }}</h3>
+                        <p>@{{ follow.follower.username|lower }} wants to follow you</p>
+                    </div>
+                </div>
+                
+                <div class="request-actions">
+                    <a href="{% url 'accept_follow_request' follow.id %}" class="action-btn accept">
+                        <i class="bi bi-check-circle"></i> Accept
+                    </a>
+                    <a href="{% url 'reject_follow_request' follow.id %}" class="action-btn reject">
+                        <i class="bi bi-x-circle"></i> Reject
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="bi bi-inbox"></i>
+            </div>
+            <p class="empty-state-text">No pending follow requests</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

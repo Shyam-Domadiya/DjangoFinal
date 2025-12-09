@@ -119,6 +119,12 @@
             </li>
             {% if user.is_authenticated %}
               <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_list' %}"><i class="bi bi-people"></i> Users</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'follow_requests' %}"><i class="bi bi-person-check"></i> Requests</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link btn btn-primary text-white ms-2" href="{% url 'tweet_create' %}"><i class="bi bi-plus-circle"></i> New Tweet</a>
               </li>
               <li class="nav-item dropdown">
