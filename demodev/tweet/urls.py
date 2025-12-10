@@ -22,4 +22,5 @@ urlpatterns = [
     path('comment/delete/<int:comment_id>/', views.delete_comment, name='delete_comment'),
     path('tweet/<int:tweet_id>/like/', views.toggle_like, name='toggle_like'),
     path('tweet/<int:tweet_id>/likes/', views.tweet_likes, name='tweet_likes'),
+    path('ajax/refresh/', views.refresh_content, name='refresh_content'),
 ]

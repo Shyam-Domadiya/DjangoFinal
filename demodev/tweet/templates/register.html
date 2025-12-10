@@ -159,6 +159,91 @@
         border: 1px solid rgba(248, 81, 73, 0.3);
         color: #f85149;
     }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .auth-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.1);
+    }
+
+    [data-bs-theme="light"] .auth-header {
+        border-bottom-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .auth-header h1 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .auth-header p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .form-group label {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .form-group input {
+        background-color: var(--bg-solid-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .form-group input:focus {
+        background-color: var(--bg-solid-primary);
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .form-help {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .form-errors {
+        background-color: var(--light-danger);
+        border-color: rgba(220, 38, 38, 0.4);
+        color: var(--danger-color);
+    }
+
+    [data-bs-theme="light"] .submit-btn {
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .submit-btn:hover {
+        box-shadow: 0 6px 20px var(--glow-success);
+        transform: translateY(-2px);
+    }
+
+    [data-bs-theme="light"] .auth-footer {
+        border-top-color: var(--border-color);
+        background-color: rgba(248, 250, 252, 0.5);
+    }
+
+    [data-bs-theme="light"] .auth-footer p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .auth-footer a {
+        color: var(--accent-color);
+    }
+
+    [data-bs-theme="light"] .auth-footer a:hover {
+        color: var(--accent-hover);
+    }
+
+    [data-bs-theme="light"] .alert-success {
+        background-color: var(--light-success);
+        border-color: rgba(5, 150, 105, 0.4);
+        color: var(--success-color);
+    }
+
+    [data-bs-theme="light"] .alert-error {
+        background-color: var(--light-danger);
+        border-color: rgba(220, 38, 38, 0.4);
+        color: var(--danger-color);
+    }
 </style>
 
 <div class="auth-container">

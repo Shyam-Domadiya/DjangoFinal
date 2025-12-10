@@ -16,18 +16,18 @@
         align-items: center;
         margin-bottom: 40px;
         padding-bottom: 20px;
-        border-bottom: 2px solid #404050;
+        border-bottom: 2px solid var(--border-color);
     }
 
     .tweets-header h1 {
         font-size: 32px;
         font-weight: 700;
         margin: 0;
-        color: #ffffff;
+        color: var(--text-primary);
     }
 
     .tweets-header .btn-create {
-        background-color: #238636;
+        background-color: var(--success-color);
         color: white;
         padding: 12px 24px;
         border-radius: 8px;
@@ -39,7 +39,7 @@
     }
 
     .tweets-header .btn-create:hover {
-        background-color: #2ea043;
+        background-color: var(--success-hover);
     }
 
     .tweets-grid {
@@ -50,19 +50,19 @@
     }
 
     .tweet-card {
-        background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
-        border: 1px solid #404050;
+        background: linear-gradient(135deg, var(--card-gradient-start) 0%, var(--card-gradient-end) 100%);
+        border: 1px solid var(--border-color);
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s ease;
         display: flex;
         flex-direction: column;
         height: 100%;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px var(--shadow-color);
     }
 
     .tweet-card:hover {
-        border-color: #58a6ff;
+        border-color: var(--accent-color);
         box-shadow: 0 8px 24px rgba(88, 166, 255, 0.15);
         transform: translateY(-4px);
     }
@@ -77,11 +77,11 @@
     .tweet-image-placeholder {
         width: 100%;
         height: 200px;
-        background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
+        background: linear-gradient(135deg, var(--card-gradient-start) 0%, var(--card-gradient-end) 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #404050;
+        color: var(--border-color);
     }
 
     .tweet-body {
@@ -114,17 +114,17 @@
         margin: 0;
         font-size: 15px;
         font-weight: 600;
-        color: #e0e0e0;
+        color: var(--text-primary);
     }
 
     .tweet-author-info p {
         margin: 2px 0 0 0;
         font-size: 12px;
-        color: #8b949e;
+        color: var(--text-secondary);
     }
 
     .tweet-text {
-        color: #c9d1d9;
+        color: var(--text-primary);
         font-size: 14px;
         line-height: 1.5;
         margin-bottom: 16px;
@@ -136,7 +136,7 @@
         display: flex;
         gap: 8px;
         padding-top: 12px;
-        border-top: 1px solid #404050;
+        border-top: 1px solid var(--border-color);
     }
 
     .tweet-action-btn {
@@ -155,28 +155,28 @@
     }
 
     .tweet-action-btn.edit {
-        border-color: #58a6ff;
-        color: #58a6ff;
+        border-color: var(--accent-color);
+        color: var(--accent-color);
     }
 
     .tweet-action-btn.edit:hover {
         background-color: rgba(88, 166, 255, 0.1);
-        border-color: #79c0ff;
+        border-color: var(--accent-color);
     }
 
     .tweet-action-btn.delete {
-        border-color: #f85149;
-        color: #f85149;
+        border-color: var(--danger-color);
+        color: var(--danger-color);
     }
 
     .tweet-action-btn.delete:hover {
         background-color: rgba(248, 81, 73, 0.1);
-        border-color: #ff7b72;
+        border-color: var(--danger-color);
     }
 
     .tweet-action-btn.like-btn {
-        border-color: #f85149;
-        color: #f85149;
+        border-color: var(--danger-color);
+        color: var(--danger-color);
     }
 
     .tweet-action-btn.like-btn:hover {
@@ -194,19 +194,19 @@
 
     .empty-state-icon {
         font-size: 48px;
-        color: #404050;
+        color: var(--border-color);
         margin-bottom: 16px;
     }
 
     .empty-state-text {
         font-size: 16px;
-        color: #8b949e;
+        color: var(--text-secondary);
         margin-bottom: 24px;
     }
 
     .empty-state-link {
         display: inline-block;
-        background-color: #238636;
+        background-color: var(--success-color);
         color: white;
         padding: 10px 20px;
         border-radius: 6px;
@@ -216,7 +216,90 @@
     }
 
     .empty-state-link:hover {
-        background-color: #2ea043;
+        background-color: var(--success-hover);
+    }
+
+    /* Light theme specific enhancements */
+    [data-bs-theme="light"] .tweet-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(30px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .tweet-card::before {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+        opacity: 0.98;
+    }
+
+    [data-bs-theme="light"] .tweet-card:hover {
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+        border-color: var(--accent-color);
+        transform: translateY(-10px) scale(1.02);
+    }
+
+    [data-bs-theme="light"] .tweet-card::after {
+        background: linear-gradient(45deg, #3b82f6, #059669, #0ea5e9, #3b82f6);
+        opacity: 0.8;
+    }
+
+    [data-bs-theme="light"] .tweet-avatar {
+        background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 50%, var(--info-color) 100%);
+        box-shadow: 0 6px 20px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-avatar:hover {
+        box-shadow: 0 10px 30px var(--glow-primary);
+        transform: scale(1.15) rotate(8deg);
+    }
+
+    [data-bs-theme="light"] .tweet-action-btn {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(15px);
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    [data-bs-theme="light"] .tweet-action-btn.edit:hover {
+        background: var(--light-accent);
+        box-shadow: 0 8px 25px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-action-btn.delete:hover {
+        background: var(--light-danger);
+        box-shadow: 0 8px 25px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .tweet-action-btn.like-btn:hover {
+        background: var(--light-danger);
+        box-shadow: 0 8px 25px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .tweet-action-btn.like-btn.liked {
+        background: linear-gradient(135deg, var(--light-danger) 0%, rgba(220, 38, 38, 0.2) 100%);
+        box-shadow: 0 6px 20px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .tweets-header .btn-create {
+        background: linear-gradient(135deg, var(--success-color) 0%, #10b981 50%, var(--success-hover) 100%);
+        box-shadow: 0 6px 20px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .tweets-header .btn-create:hover {
+        background: linear-gradient(135deg, var(--success-hover) 0%, var(--success-color) 50%, #10b981 100%);
+        box-shadow: 0 10px 30px var(--glow-success);
+        transform: translateY(-3px) scale(1.05);
+    }
+
+    [data-bs-theme="light"] .empty-state-link {
+        background: linear-gradient(135deg, var(--success-color) 0%, #10b981 100%);
+        box-shadow: 0 6px 20px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .empty-state-link:hover {
+        background: linear-gradient(135deg, var(--success-hover) 0%, var(--success-color) 100%);
+        box-shadow: 0 10px 30px var(--glow-success);
+        transform: translateY(-3px) scale(1.05);
     }
 
     @media (max-width: 768px) {
@@ -276,7 +359,7 @@
                         
                         <div class="tweet-actions">
                             {% if user.is_authenticated %}
-                                <button onclick="toggleLike({{ tweet.id }}, this)" class="tweet-action-btn like-btn {% if tweet.user_has_liked %}liked{% endif %}" style="border-color: #f85149; color: #f85149;">
+                                <button onclick="toggleLike({{ tweet.id }}, this)" class="tweet-action-btn like-btn {% if tweet.user_has_liked %}liked{% endif %}" style="border-color: #f85149; color: #f85149;" data-tweet-id="{{ tweet.id }}">
                                     <i class="bi bi-heart{% if tweet.user_has_liked %}-fill{% endif %}"></i> <span class="like-count">{{ tweet.like_count }}</span>
                                 </button>
                             {% endif %}
@@ -287,7 +370,7 @@
                                 <a href="{% url 'tweet_edit' tweet.id %}" class="tweet-action-btn edit">
                                     <i class="bi bi-pencil"></i> Edit
                                 </a>
-                                <button onclick="return deleteTweet({{ tweet.id }})" class="tweet-action-btn delete">
+                                <button onclick="return deleteTweet({{ tweet.id }})" class="tweet-action-btn delete" data-tweet-id="{{ tweet.id }}">
                                     <i class="bi bi-trash"></i> Delete
                                 </button>
                             {% endif %}

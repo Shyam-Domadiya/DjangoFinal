@@ -242,6 +242,137 @@
     .action-btn.view-likes-btn:hover {
         background-color: rgba(88, 166, 255, 0.1);
     }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .tweet-detail-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .tweet-avatar {
+        background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 50%, var(--info-color) 100%);
+        box-shadow: 0 4px 15px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-user-info h3 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-user-info p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .tweet-content {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-meta {
+        color: var(--text-secondary);
+        border-top-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .comments-section {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .comments-header {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .comment-form textarea {
+        background-color: var(--bg-solid-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .comment-form textarea:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .comment-form button {
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .comment-form button:hover {
+        box-shadow: 0 6px 20px var(--glow-success);
+        transform: translateY(-2px);
+    }
+
+    [data-bs-theme="light"] .comment-card {
+        background-color: var(--bg-solid-secondary);
+        border-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .comment-avatar {
+        background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 50%, var(--info-color) 100%);
+        box-shadow: 0 4px 15px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .comment-username {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .comment-time {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .comment-text {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .comment-delete {
+        border-color: var(--danger-color);
+        color: var(--danger-color);
+    }
+
+    [data-bs-theme="light"] .comment-delete:hover {
+        background-color: var(--light-danger);
+    }
+
+    [data-bs-theme="light"] .back-btn {
+        color: var(--accent-color);
+    }
+
+    [data-bs-theme="light"] .back-btn:hover {
+        color: var(--accent-hover);
+    }
+
+    [data-bs-theme="light"] .empty-comments {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .action-btn.like-btn {
+        border-color: var(--danger-color);
+        color: var(--danger-color);
+    }
+
+    [data-bs-theme="light"] .action-btn.like-btn:hover {
+        background-color: var(--light-danger);
+    }
+
+    [data-bs-theme="light"] .action-btn.like-btn.liked {
+        background-color: var(--light-danger);
+    }
+
+    [data-bs-theme="light"] .action-btn.view-likes-btn {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+    }
+
+    [data-bs-theme="light"] .action-btn.view-likes-btn:hover {
+        background-color: var(--light-accent);
+    }
+
+    [data-bs-theme="light"] div[style*="border-top: 1px solid #30363d"] {
+        border-top-color: var(--border-color) !important;
+    }
 </style>
 
 <div class="detail-container">

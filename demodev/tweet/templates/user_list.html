@@ -113,6 +113,68 @@
         padding: 60px 20px;
         color: #8b949e;
     }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .users-header {
+        border-bottom-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .users-header h1 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .user-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .user-card:hover {
+        border-color: var(--accent-color);
+        box-shadow: 0 8px 30px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .user-avatar {
+        background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 50%, var(--info-color) 100%);
+        box-shadow: 0 4px 15px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .user-details h3 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .user-details p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .follow-btn.follow {
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .follow-btn.follow:hover {
+        box-shadow: 0 6px 20px var(--glow-success);
+        transform: translateY(-2px);
+    }
+
+    [data-bs-theme="light"] .follow-btn.pending {
+        background-color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .follow-btn.unfollow {
+        background: linear-gradient(135deg, var(--danger-color) 0%, var(--danger-hover) 100%);
+        box-shadow: 0 4px 15px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .follow-btn.unfollow:hover {
+        box-shadow: 0 6px 20px var(--glow-danger);
+        transform: translateY(-2px);
+    }
+
+    [data-bs-theme="light"] .empty-state {
+        color: var(--text-secondary);
+    }
 </style>
 
 <div class="users-container">

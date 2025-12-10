@@ -103,6 +103,59 @@
         font-size: 48px;
         margin-bottom: 16px;
     }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .likes-header h1 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .tweet-preview {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .likes-list {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    [data-bs-theme="light"] .like-item {
+        border-bottom-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .like-item:hover {
+        background-color: var(--light-accent);
+    }
+
+    [data-bs-theme="light"] .like-avatar {
+        background: linear-gradient(135deg, var(--accent-color) 0%, #6366f1 50%, var(--info-color) 100%);
+        box-shadow: 0 4px 15px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .like-user-info h3 {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .like-user-info p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .back-btn {
+        color: var(--accent-color);
+    }
+
+    [data-bs-theme="light"] .back-btn:hover {
+        color: var(--accent-hover);
+    }
+
+    [data-bs-theme="light"] .empty-state {
+        color: var(--text-secondary);
+    }
 </style>
 
 <div class="likes-container">

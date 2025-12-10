@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Count
+from django.utils import timezone
 
 def index(request):
     tweets = Tweet.objects.all().order_by('-created_at').annotate(
@@ -295,3 +296,44 @@ def tweet_likes(request, tweet_id):
         'tweet': tweet,
         'likes': likes
     })
+
+def refresh_content(request):
+    """AJAX endpoint for auto-refresh functionality"""
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        path = request.GET.get('path', '/')
+        
+        if path == '/' or path == '/tweets/':
+            # Return fresh tweet data
+            tweets = Tweet.objects.all().order_by('-created_at').annotate(
+                like_count=Count('likes')
+            )
+            
+            # Add user_has_liked flag for authenticated users
+            if request.user.is_authenticated:
+                for tweet in tweets:
+                    tweet.user_has_liked = Like.objects.filter(user=request.user, tweet=tweet).exists()
+            
+            return JsonResponse({
+                'success': True,
+                'tweet_count': tweets.count(),
+                'latest_tweet_id': tweets.first().id if tweets.exists() else None,
+                'timestamp': timezone.now().isoformat()
+            })
+        
+        elif '/tweet/' in path:
+            # Return fresh comment data for tweet detail
+            tweet_id = path.split('/tweet/')[1].split('/')[0]
+            try:
+                tweet = Tweet.objects.get(id=tweet_id)
+                return JsonResponse({
+                    'success': True,
+                    'comment_count': tweet.comments.count(),
+                    'like_count': tweet.likes.count(),
+                    'timestamp': timezone.now().isoformat()
+                })
+            except Tweet.DoesNotExist:
+                return JsonResponse({'success': False, 'error': 'Tweet not found'}, status=404)
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+
+

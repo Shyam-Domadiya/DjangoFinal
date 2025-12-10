@@ -102,6 +102,57 @@
         background-color: rgba(88, 166, 255, 0.1);
         border-color: #79c0ff;
     }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .delete-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-color: var(--danger-color);
+        box-shadow: 0 8px 30px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .delete-header {
+        border-bottom-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .delete-icon {
+        background-color: var(--light-danger);
+        color: var(--danger-color);
+    }
+
+    [data-bs-theme="light"] .delete-header h1 {
+        color: var(--danger-color);
+    }
+
+    [data-bs-theme="light"] .delete-header p {
+        color: var(--text-secondary);
+    }
+
+    [data-bs-theme="light"] .delete-warning {
+        background-color: var(--light-warning);
+        border-color: rgba(217, 119, 6, 0.4);
+        color: var(--warning-color);
+    }
+
+    [data-bs-theme="light"] .delete-btn-confirm {
+        background: linear-gradient(135deg, var(--danger-color) 0%, var(--danger-hover) 100%);
+        box-shadow: 0 4px 15px var(--glow-danger);
+    }
+
+    [data-bs-theme="light"] .delete-btn-confirm:hover {
+        box-shadow: 0 6px 20px var(--glow-danger);
+        transform: translateY(-2px);
+    }
+
+    [data-bs-theme="light"] .delete-btn-cancel {
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+
+    [data-bs-theme="light"] .delete-btn-cancel:hover {
+        background-color: var(--light-accent);
+        border-color: var(--accent-hover);
+    }
 </style>
 
 <div class="delete-container">
