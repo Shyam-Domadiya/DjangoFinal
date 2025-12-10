@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\migrations\0002_alter_tweet_id_userprofile_passwordresetotp.py
+# hypothesis_version: 6.148.7
+
+['0001_initial', 'Email', 'ID', 'PasswordResetOTP', 'SMS', 'UserProfile', 'created_at', 'email', 'expires_at', 'id', 'is_verified', 'otp', 'otp_type', 'phone_number', 'profile', 'sms', 'tweet', 'updated_at', 'user']

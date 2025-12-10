@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\serializers.py
+# hypothesis_version: 6.148.7
+
+['bio', 'comment_count', 'comments', 'content', 'created_at', 'display_name', 'edit_history', 'edited_at', 'edited_by', 'email', 'file', 'file_size', 'file_type', 'first_name', 'follower', 'follower_count', 'following', 'following_count', 'height', 'id', 'is_accepted', 'is_edited', 'is_pinned', 'is_scheduled', 'last_name', 'like_count', 'media', 'media_ids', 'photo', 'pinned_at', 'previous_content', 'profile_picture', 'request', 'text', 'thumbnail', 'tweet', 'tweet_count', 'updated_at', 'uploaded_at', 'user', 'user_has_liked', 'username', 'width']

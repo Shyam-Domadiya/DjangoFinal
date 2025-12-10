@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% load static %}
 
 {% block title %}
     {% if form.instance.pk %}
@@ -175,6 +176,163 @@
         display: none;
     }
 
+    .media-gallery {
+        margin-top: 20px;
+        padding: 16px;
+        background-color: #0d1117;
+        border: 1px solid #404050;
+        border-radius: 8px;
+    }
+
+    .media-gallery-title {
+        font-weight: 600;
+        color: #e0e0e0;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+    }
+
+    .media-item {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #161b22;
+        border: 1px solid #404050;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .media-item:hover {
+        border-color: #58a6ff;
+        box-shadow: 0 0 8px rgba(88, 166, 255, 0.2);
+    }
+
+    .media-item img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .media-item.selected {
+        border-color: #238636;
+        box-shadow: 0 0 8px rgba(35, 134, 54, 0.3);
+    }
+
+    .media-item.selected::after {
+        content: '✓';
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: #238636;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .media-preview-container {
+        margin-top: 20px;
+        padding: 16px;
+        background-color: #0d1117;
+        border: 1px solid #404050;
+        border-radius: 8px;
+    }
+
+    .media-preview-title {
+        font-weight: 600;
+        color: #e0e0e0;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+    .media-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+
+    .media-preview-item {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: #161b22;
+        border: 1px solid #404050;
+    }
+
+    .media-preview-item img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .media-remove-btn {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background-color: #f85149;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        transition: background-color 0.2s;
+    }
+
+    .media-remove-btn:hover {
+        background-color: #da3633;
+    }
+
+    .upload-progress {
+        margin-top: 12px;
+        padding: 12px;
+        background-color: #161b22;
+        border-radius: 6px;
+        display: none;
+    }
+
+    .upload-progress.active {
+        display: block;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 6px;
+        background-color: #404050;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: #238636;
+        width: 0%;
+        transition: width 0.3s;
+    }
+
+    .upload-status {
+        font-size: 12px;
+        color: #8b949e;
+        margin-top: 6px;
+    }
+
     /* Light theme support */
     [data-bs-theme="light"] .form-card {
         background: rgba(255, 255, 255, 0.95);
@@ -262,6 +420,60 @@
         box-shadow: 0 6px 20px var(--glow-success);
         transform: translateY(-2px);
     }
+
+    [data-bs-theme="light"] .media-gallery {
+        background-color: var(--bg-solid-secondary);
+        border-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .media-gallery-title {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .media-item {
+        background-color: var(--bg-solid-primary);
+        border-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .media-item:hover {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 8px var(--glow-primary);
+    }
+
+    [data-bs-theme="light"] .media-item.selected {
+        border-color: var(--success-color);
+        box-shadow: 0 0 8px var(--glow-success);
+    }
+
+    [data-bs-theme="light"] .media-preview-container {
+        background-color: var(--bg-solid-secondary);
+        border-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .media-preview-title {
+        color: var(--text-primary);
+    }
+
+    [data-bs-theme="light"] .media-preview-item {
+        background-color: var(--bg-solid-primary);
+        border-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .upload-progress {
+        background-color: var(--bg-solid-primary);
+    }
+
+    [data-bs-theme="light"] .progress-bar {
+        background-color: var(--border-color);
+    }
+
+    [data-bs-theme="light"] .progress-fill {
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
+    }
+
+    [data-bs-theme="light"] .upload-status {
+        color: var(--text-secondary);
+    }
 </style>
 
 <div class="form-container">
@@ -278,41 +490,88 @@
         </div>
 
         <div class="form-body">
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" id="tweet-form">
                 {% csrf_token %}
                 
                 {% for field in form %}
-                    <div class="form-group">
-                        {% if field.label %}
-                            <label for="{{ field.id_for_label }}">
-                                {{ field.label }}
-                            </label>
-                        {% endif %}
-                        
-                        {% if field.field.widget.input_type == 'textarea' %}
-                            {{ field }}
-                            <span class="form-help">Share your thoughts, ideas, or updates</span>
-                        {% elif field.field.widget.input_type == 'file' %}
-                            <div class="file-input-wrapper">
-                                <label for="{{ field.id_for_label }}" class="file-input-label">
-                                    <i class="bi bi-image"></i> Choose Image
+                    {% if field.name == 'media_ids' %}
+                        {{ field }}
+                    {% else %}
+                        <div class="form-group">
+                            {% if field.label %}
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
                                 </label>
+                            {% endif %}
+                            
+                            {% if field.field.widget.input_type == 'textarea' %}
                                 {{ field }}
-                            </div>
-                            <span class="form-help">Optional: Add an image to make your tweet more engaging</span>
-                        {% else %}
-                            {{ field }}
-                        {% endif %}
+                                <span class="form-help">Share your thoughts, ideas, or updates</span>
+                            {% elif field.field.widget.input_type == 'file' %}
+                                <div class="file-input-wrapper">
+                                    <label for="{{ field.id_for_label }}" class="file-input-label">
+                                        <i class="bi bi-image"></i> Choose Image
+                                    </label>
+                                    {{ field }}
+                                </div>
+                                <span class="form-help">Optional: Add an image to make your tweet more engaging</span>
+                            {% elif field.name == 'scheduled_publish_time' %}
+                                {{ field }}
+                                <span class="form-help">{{ field.help_text }}</span>
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
 
-                        {% if field.errors %}
-                            <div class="form-errors">
-                                {% for error in field.errors %}
-                                    <small><i class="bi bi-exclamation-circle"></i> {{ error }}</small>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </div>
+                            {% if field.errors %}
+                                <div class="form-errors">
+                                    {% for error in field.errors %}
+                                        <small><i class="bi bi-exclamation-circle"></i> {{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 {% endfor %}
+
+                <!-- Media Upload Section -->
+                <div class="form-group">
+                    <label for="media-upload-input">
+                        <i class="bi bi-images"></i> Add Media
+                    </label>
+                    <div class="file-input-wrapper">
+                        <label for="media-upload-input" class="file-input-label">
+                            <i class="bi bi-cloud-upload"></i> Upload Media
+                        </label>
+                        <input type="file" id="media-upload-input" accept="image/jpeg,image/png,image/gif" multiple>
+                    </div>
+                    <span class="form-help">Upload images (JPEG, PNG, GIF) up to 5MB each</span>
+                    <div class="upload-progress" id="upload-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="upload-status" id="upload-status">Uploading...</div>
+                    </div>
+                </div>
+
+                <!-- Media Gallery -->
+                <div class="media-gallery" id="media-gallery" style="display: none;">
+                    <div class="media-gallery-title">
+                        <i class="bi bi-images"></i> Available Media
+                    </div>
+                    <div class="media-grid" id="media-grid">
+                        <!-- Media items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Media Preview -->
+                <div class="media-preview-container" id="media-preview-container" style="display: none;">
+                    <div class="media-preview-title">
+                        <i class="bi bi-check-circle"></i> Selected Media (<span id="selected-count">0</span>)
+                    </div>
+                    <div class="media-preview-grid" id="media-preview-grid">
+                        <!-- Selected media will be shown here -->
+                    </div>
+                </div>
 
                 <div class="form-actions">
                     <button type="submit" class="btn-submit">
@@ -331,4 +590,164 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'js/draft-manager.js' %}"></script>
+<script>
+    // Media management for tweet form
+    let selectedMediaIds = new Set();
+    let allMedia = {};
+
+    // Load user's media on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        loadUserMedia();
+        
+        // Load existing media if editing
+        const mediaIdsField = document.getElementById('id_media_ids');
+        if (mediaIdsField && mediaIdsField.value) {
+            selectedMediaIds = new Set(mediaIdsField.value.split(',').map(id => parseInt(id.trim())));
+        }
+    });
+
+    // Load user's media files
+    function loadUserMedia() {
+        fetch('{% url "get_user_media" %}', {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.media.length > 0) {
+                data.media.forEach(media => {
+                    allMedia[media.id] = media;
+                });
+                renderMediaGallery();
+                document.getElementById('media-gallery').style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error loading media:', error));
+    }
+
+    // Render media gallery
+    function renderMediaGallery() {
+        const grid = document.getElementById('media-grid');
+        grid.innerHTML = '';
+        
+        Object.values(allMedia).forEach(media => {
+            const item = document.createElement('div');
+            item.className = 'media-item' + (selectedMediaIds.has(media.id) ? ' selected' : '');
+            item.innerHTML = `<img src="${media.thumbnail_url}" alt="Media">`;
+            item.onclick = () => toggleMediaSelection(media.id);
+            grid.appendChild(item);
+        });
+    }
+
+    // Toggle media selection
+    function toggleMediaSelection(mediaId) {
+        if (selectedMediaIds.has(mediaId)) {
+            selectedMediaIds.delete(mediaId);
+        } else {
+            selectedMediaIds.add(mediaId);
+        }
+        updateMediaField();
+        renderMediaGallery();
+        renderMediaPreview();
+    }
+
+    // Update hidden media_ids field
+    function updateMediaField() {
+        const mediaIdsField = document.getElementById('id_media_ids');
+        mediaIdsField.value = Array.from(selectedMediaIds).join(',');
+    }
+
+    // Render media preview
+    function renderMediaPreview() {
+        const previewGrid = document.getElementById('media-preview-grid');
+        const previewContainer = document.getElementById('media-preview-container');
+        const selectedCount = document.getElementById('selected-count');
+        
+        previewGrid.innerHTML = '';
+        selectedCount.textContent = selectedMediaIds.size;
+        
+        if (selectedMediaIds.size === 0) {
+            previewContainer.style.display = 'none';
+            return;
+        }
+        
+        previewContainer.style.display = 'block';
+        
+        selectedMediaIds.forEach(mediaId => {
+            const media = allMedia[mediaId];
+            if (media) {
+                const item = document.createElement('div');
+                item.className = 'media-preview-item';
+                item.innerHTML = `
+                    <img src="${media.thumbnail_url}" alt="Media">
+                    <button type="button" class="media-remove-btn" onclick="removeMediaSelection(${mediaId})">
+                        <i class="bi bi-x"></i>
+                    </button>
+                `;
+                previewGrid.appendChild(item);
+            }
+        });
+    }
+
+    // Remove media from selection
+    function removeMediaSelection(mediaId) {
+        selectedMediaIds.delete(mediaId);
+        updateMediaField();
+        renderMediaGallery();
+        renderMediaPreview();
+    }
+
+    // Handle media upload
+    document.getElementById('media-upload-input').addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+        if (files.length === 0) return;
+        
+        const progressContainer = document.getElementById('upload-progress');
+        progressContainer.classList.add('active');
+        
+        let uploaded = 0;
+        files.forEach((file, index) => {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('{% url "upload_media" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    allMedia[data.media.id] = data.media;
+                    selectedMediaIds.add(data.media.id);
+                    uploaded++;
+                    
+                    const progress = (uploaded / files.length) * 100;
+                    document.getElementById('progress-fill').style.width = progress + '%';
+                    document.getElementById('upload-status').textContent = `Uploaded ${uploaded} of ${files.length}`;
+                    
+                    if (uploaded === files.length) {
+                        setTimeout(() => {
+                            progressContainer.classList.remove('active');
+                            document.getElementById('media-upload-input').value = '';
+                        }, 1000);
+                    }
+                    
+                    updateMediaField();
+                    renderMediaGallery();
+                    renderMediaPreview();
+                    document.getElementById('media-gallery').style.display = 'block';
+                } else {
+                    console.error('Upload failed:', data.errors);
+                }
+            })
+            .catch(error => console.error('Upload error:', error));
+        });
+    });
+</script>
 {% endblock %}

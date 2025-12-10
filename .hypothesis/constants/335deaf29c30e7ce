@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\migrations\0003_follow_remove_userprofile_user_and_more.py
+# hypothesis_version: 6.148.7
+
+['Follow', 'ID', 'PasswordResetOTP', 'UserProfile', 'created_at', 'follower', 'followers', 'following', 'id', 'is_accepted', 'tweet', 'unique_together', 'user', 'userprofile']

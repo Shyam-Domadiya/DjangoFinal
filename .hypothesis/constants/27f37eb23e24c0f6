@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\settings.py
+# hypothesis_version: 6.148.7
+
+['/media/', '/tweets/', '127.0.0.1', 'APP_DIRS', 'BACKEND', 'DIRS', 'ENGINE', 'NAME', 'OPTIONS', 'UTC', '[::1]', 'context_processors', 'db.sqlite3', 'default', 'demodev', 'demodev.urls', 'django.contrib.admin', 'django.contrib.auth', 'en-us', 'localhost', 'login', 'media', 'static', 'static/', 'templates', 'tweet']

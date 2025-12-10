@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\forms.py
+# hypothesis_version: 6.148.7
+
+['email', 'password1', 'password2', 'photo', 'text', 'username']

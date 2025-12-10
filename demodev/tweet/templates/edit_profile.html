@@ -1,0 +1,411 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<style>
+    .edit-profile-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .edit-profile-card {
+        background: linear-gradient(135deg, var(--card-gradient-start) 0%, var(--card-gradient-end) 100%);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 40px;
+        box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .edit-profile-header {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .edit-profile-header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .edit-profile-header p {
+        color: var(--text-secondary);
+        margin: 8px 0 0 0;
+        font-size: 14px;
+    }
+
+    .profile-picture-preview {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .profile-picture-preview-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--accent-color);
+        box-shadow: 0 8px 24px rgba(88, 166, 255, 0.3);
+        margin-bottom: 16px;
+    }
+
+    .profile-picture-preview-placeholder {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #58a6ff 0%, #1f6feb 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 40px;
+        border: 4px solid var(--accent-color);
+        box-shadow: 0 8px 24px rgba(88, 166, 255, 0.3);
+        margin: 0 auto 16px;
+    }
+
+    .profile-picture-preview-label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        background-color: var(--input-bg);
+        color: var(--text-primary);
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .form-group .help-text {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 6px;
+    }
+
+    .form-group .char-count {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-top: 6px;
+    }
+
+    .form-group .char-count.warning {
+        color: var(--warning-color);
+    }
+
+    .form-group .char-count.danger {
+        color: var(--danger-color);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .btn {
+        flex: 1;
+        padding: 12px 24px;
+        border-radius: 8px;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
+        color: white;
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    .btn-save:hover {
+        background: linear-gradient(135deg, var(--success-hover) 0%, var(--success-color) 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--glow-success);
+    }
+
+    .btn-save:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    .btn-cancel {
+        background-color: transparent;
+        color: var(--accent-color);
+        border: 1px solid var(--accent-color);
+    }
+
+    .btn-cancel:hover {
+        background-color: rgba(88, 166, 255, 0.1);
+        border-color: var(--accent-color);
+    }
+
+    .error-message {
+        background-color: rgba(248, 81, 73, 0.1);
+        border: 1px solid var(--danger-color);
+        color: var(--danger-color);
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .error-message ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .error-message li {
+        margin: 4px 0;
+    }
+
+    @media (max-width: 768px) {
+        .edit-profile-container {
+            padding: 20px 16px;
+        }
+
+        .edit-profile-card {
+            padding: 24px;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="edit-profile-container">
+    <div class="edit-profile-card">
+        <div class="edit-profile-header">
+            <h1><i class="bi bi-pencil-square"></i> Edit Profile</h1>
+            <p>Update your profile information and picture</p>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+            <div class="error-message">
+                {% for error in form.non_field_errors %}
+                    <div>{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Profile Picture Preview -->
+            <div class="profile-picture-preview">
+                {% if profile.profile_picture %}
+                    <img src="{{ profile.profile_picture.url }}" alt="Current profile picture" class="profile-picture-preview-image" id="profilePicturePreview">
+                {% else %}
+                    <div class="profile-picture-preview-placeholder" id="profilePicturePreview">
+                        {{ request.user.username|first|upper }}
+                    </div>
+                {% endif %}
+                <div class="profile-picture-preview-label">Current Profile Picture</div>
+            </div>
+
+            <!-- Profile Picture Field -->
+            <div class="form-group">
+                <label for="{{ form.profile_picture.id_for_label }}">
+                    <i class="bi bi-image"></i> Profile Picture
+                </label>
+                {{ form.profile_picture }}
+                {% if form.profile_picture.errors %}
+                    <div class="error-message">
+                        {% for error in form.profile_picture.errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="help-text">
+                    <i class="bi bi-info-circle"></i> Supported formats: JPEG, PNG, GIF (Max 5MB)
+                </div>
+            </div>
+
+            <!-- Display Name Field -->
+            <div class="form-group">
+                <label for="{{ form.display_name.id_for_label }}">
+                    <i class="bi bi-person"></i> Display Name
+                </label>
+                {{ form.display_name }}
+                {% if form.display_name.errors %}
+                    <div class="error-message">
+                        {% for error in form.display_name.errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="char-count" id="displayNameCount">
+                    <span id="displayNameLength">0</span>/100 characters
+                </div>
+            </div>
+
+            <!-- Bio Field -->
+            <div class="form-group">
+                <label for="{{ form.bio.id_for_label }}">
+                    <i class="bi bi-chat-left-text"></i> Bio
+                </label>
+                {{ form.bio }}
+                {% if form.bio.errors %}
+                    <div class="error-message">
+                        {% for error in form.bio.errors %}
+                            <div>{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="char-count" id="bioCount">
+                    <span id="bioLength">0</span>/500 characters
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-save">
+                    <i class="bi bi-check-circle"></i> Save Changes
+                </button>
+                <a href="{% url 'user_profile' request.user.username %}" class="btn btn-cancel">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Character counter for display name
+    const displayNameInput = document.getElementById('{{ form.display_name.id_for_label }}');
+    const displayNameLength = document.getElementById('displayNameLength');
+    const displayNameCount = document.getElementById('displayNameCount');
+
+    if (displayNameInput) {
+        displayNameInput.addEventListener('input', function() {
+            const length = this.value.length;
+            displayNameLength.textContent = length;
+            
+            if (length > 90) {
+                displayNameCount.classList.add('warning');
+            } else {
+                displayNameCount.classList.remove('warning');
+            }
+            
+            if (length > 100) {
+                displayNameCount.classList.add('danger');
+            } else {
+                displayNameCount.classList.remove('danger');
+            }
+        });
+        
+        // Initialize on page load
+        displayNameLength.textContent = displayNameInput.value.length;
+    }
+
+    // Character counter for bio
+    const bioInput = document.getElementById('{{ form.bio.id_for_label }}');
+    const bioLength = document.getElementById('bioLength');
+    const bioCount = document.getElementById('bioCount');
+
+    if (bioInput) {
+        bioInput.addEventListener('input', function() {
+            const length = this.value.length;
+            bioLength.textContent = length;
+            
+            if (length > 450) {
+                bioCount.classList.add('warning');
+            } else {
+                bioCount.classList.remove('warning');
+            }
+            
+            if (length > 500) {
+                bioCount.classList.add('danger');
+            } else {
+                bioCount.classList.remove('danger');
+            }
+        });
+        
+        // Initialize on page load
+        bioLength.textContent = bioInput.value.length;
+    }
+
+    // Profile picture preview
+    const profilePictureInput = document.getElementById('{{ form.profile_picture.id_for_label }}');
+    const profilePicturePreview = document.getElementById('profilePicturePreview');
+
+    if (profilePictureInput) {
+        profilePictureInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    if (profilePicturePreview.tagName === 'IMG') {
+                        profilePicturePreview.src = event.target.result;
+                    } else {
+                        // Replace placeholder with image
+                        const img = document.createElement('img');
+                        img.src = event.target.result;
+                        img.className = 'profile-picture-preview-image';
+                        img.id = 'profilePicturePreview';
+                        profilePicturePreview.replaceWith(img);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+</script>
+{% endblock %}

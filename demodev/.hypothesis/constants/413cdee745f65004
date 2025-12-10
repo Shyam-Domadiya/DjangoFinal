@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\api_views.py
+# hypothesis_version: 6.148.7
+
+[300, '-created_at', '-edited_at', '-updated_at', '-uploaded_at', 'No draft found.', 'Tweet already liked.', 'Tweet not liked.', 'comments', 'count', 'created_at', 'detail', 'draft_id', 'edits', 'file', 'follower_count', 'following_count', 'get', 'image', 'image/gif', 'image/jpeg', 'image/png', 'is_pinned', 'like_count', 'liked', 'likes', 'list', 'media', 'media_id', 'page', 'post', 'profile', 'q', 'query', 'request', 'results', 'retrieve', 'scheduled_tweets', 'search', 'text', 'total_pages', 'total_results', 'tweet', 'tweet_count', 'tweet_id', 'tweets', 'user', 'user__profile', 'user__username', 'user_id', 'username', 'users']

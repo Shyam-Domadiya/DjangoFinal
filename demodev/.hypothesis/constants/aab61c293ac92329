@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\migrations\0009_media_alter_tweet_options_tweet_edited_at_and_more.py
+# hypothesis_version: 6.148.7
+
+[100, 500, '-created_at', '-edited_at', '-updated_at', '-uploaded_at', 'ID', 'Image', 'Media', 'TweetDraft', 'TweetEditHistory', 'UserProfile', 'Video', 'bio', 'content', 'created_at', 'display_name', 'drafts', 'edit_history', 'edited_at', 'edited_by', 'file', 'file_size', 'file_type', 'height', 'id', 'image', 'is_edited', 'is_scheduled', 'media', 'media/%Y/%m/%d/', 'media_files', 'ordering', 'previous_content', 'profile', 'profile_picture', 'profile_pictures/', 'thumbnail', 'thumbnails/', 'tweet', 'tweet.media', 'tweet.tweet', 'tweets', 'updated_at', 'uploaded_at', 'user', 'video', 'width']

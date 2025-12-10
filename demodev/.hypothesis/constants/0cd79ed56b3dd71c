@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\urls.py
+# hypothesis_version: 6.148.7
+
+['<int:tweet_id>/edit', 'add_comment_ajax', 'ajax/refresh/', 'clear_draft', 'create/', 'delete_comment', 'delete_media', 'draft/clear/', 'draft/get/', 'draft/restore/', 'draft/save/', 'edit_profile', 'follow-requests/', 'follow_requests', 'get_draft', 'get_media_tweets', 'get_scheduled_tweets', 'get_user_media', 'index', 'login', 'login.html', 'login/', 'logout', 'logout/', 'media/upload/', 'media/user/', 'pin_tweet', 'profile/edit/', 'refresh_content', 'register', 'register/', 'restore_draft', 'save_draft', 'scheduled-tweets/', 'search', 'search/', 'send_follow_request', 'toggle_like', 'tweet_create', 'tweet_delete', 'tweet_detail', 'tweet_edit', 'tweet_likes', 'tweet_list', 'tweets/', 'unfollow_user', 'unpin_tweet', 'upload_media', 'user_list', 'user_profile', 'users/']

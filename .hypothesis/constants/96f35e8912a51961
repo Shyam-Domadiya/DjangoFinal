@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\migrations\0005_passwordresetotp.py
+# hypothesis_version: 6.148.7
+
+[254, '0004_comment', 'ID', 'PasswordResetOTP', 'created_at', 'email', 'id', 'is_verified', 'otp_code', 'tweet']

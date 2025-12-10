@@ -185,15 +185,17 @@
     {% if users %}
         {% for user in users %}
             <div class="user-card">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        {{ user.username|first|upper }}
+                <a href="{% url 'user_profile' user.username %}" style="flex: 1; text-decoration: none; color: inherit;">
+                    <div class="user-info">
+                        <div class="user-avatar">
+                            {{ user.username|first|upper }}
+                        </div>
+                        <div class="user-details">
+                            <h3>{{ user.username }}</h3>
+                            <p>@{{ user.username|lower }}</p>
+                        </div>
                     </div>
-                    <div class="user-details">
-                        <h3>{{ user.username }}</h3>
-                        <p>@{{ user.username|lower }}</p>
-                    </div>
-                </div>
+                </a>
                 
                 <div>
                     {% if user.follow_status == 'none' %}

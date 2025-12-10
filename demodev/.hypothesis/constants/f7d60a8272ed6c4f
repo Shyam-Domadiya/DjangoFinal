@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\settings.py
+# hypothesis_version: 6.148.7
+
+[300, 1000, '()', '/media/', '/tweets/', '100/hour', '1000/hour', '127.0.0.1', 'APP_DIRS', 'BACKEND', 'DEBUG', 'DIRS', 'ENGINE', 'ERROR', 'INFO', 'LOCATION', 'MAX_ENTRIES', 'NAME', 'OPTIONS', 'PAGE_SIZE', 'TIMEOUT', 'UTC', '[::1]', 'anon', 'app.log', 'class', 'console', 'context_processors', 'db.sqlite3', 'default', 'demodev', 'demodev.urls', 'django', 'django.contrib.admin', 'django.contrib.auth', 'en-us', 'error_file', 'errors.log', 'file', 'filename', 'filters', 'format', 'formatter', 'formatters', 'handlers', 'level', 'localhost', 'loggers', 'logging.FileHandler', 'login', 'logs', 'media', 'propagate', 'require_debug_false', 'require_debug_true', 'rest_framework', 'simple', 'static', 'static/', 'style', 'templates', 'testserver', 'tweet', 'unique-snowflake', 'user', 'verbose', 'version', '{']

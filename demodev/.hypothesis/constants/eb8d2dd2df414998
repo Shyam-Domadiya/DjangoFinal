@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\error_handlers.py
+# hypothesis_version: 6.148.7
+
+[400, 500, 1024, 'FILE_TOO_LARGE', 'FILE_UPLOAD_ERROR', 'INVALID_FILE_TYPE', 'NO_FILE', 'No file provided', 'PAST_SCHEDULED_TIME', 'QUERY_TOO_LONG', 'SCHEDULING_ERROR', 'SEARCH_ERROR', 'TWEET_EDIT_ERROR', 'TWEET_NOT_FOUND', 'Tweet not found', 'UNAUTHORIZED_EDIT', 'UPLOAD_FAILED', 'VALIDATION_ERROR', 'error', 'error_code', 'file_name', 'file_size', 'file_type', 'image/gif', 'image/jpeg', 'image/png', 'new_length', 'previous_length', 'query', 'result_count', 'scheduled_time', 'success', 'tweet', 'tweet_id', 'user_id']

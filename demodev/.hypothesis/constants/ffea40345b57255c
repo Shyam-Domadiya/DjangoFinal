@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\management\commands\publish_scheduled_tweets.py
+# hypothesis_version: 6.148.7
+
+['--dry-run', 'dry_run', 'store_true']

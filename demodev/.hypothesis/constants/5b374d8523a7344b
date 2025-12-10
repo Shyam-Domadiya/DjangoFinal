@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\migrations\0010_tweet_is_pinned_tweet_pinned_at.py
+# hypothesis_version: 6.148.7
+
+['is_pinned', 'pinned_at', 'tweet']

@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\models.py
+# hypothesis_version: 6.148.7
+
+[100, 200, 240, 500, '-created_at', '-edited_at', '-updated_at', '-uploaded_at', 'Image', 'Video', 'accepted', 'comments', 'drafts', 'edit_history', 'follower', 'followers', 'following', 'image', 'likes', 'media/%Y/%m/%d/', 'media_files', 'pending', 'photos/', 'profile', 'profile_pictures/', 'thumbnails/', 'tweet', 'tweets', 'user', 'video']

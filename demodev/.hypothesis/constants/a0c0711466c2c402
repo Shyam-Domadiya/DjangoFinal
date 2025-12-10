@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py
+# hypothesis_version: 6.148.7
+
+['admin/', 'api-auth/', 'api/', 'rest_framework.urls', 'tweet.api_urls', 'tweet.urls']

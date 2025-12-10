@@ -131,3 +131,45 @@ function refreshTweets() {
         console.error('Error refreshing tweets:', error);
     });
 }
+
+// Cancel scheduled tweet
+function cancelScheduledTweet(tweetId) {
+    if (!confirm('Are you sure you want to cancel this scheduled tweet?')) {
+        return false;
+    }
+    
+    const csrftoken = getCookie('csrftoken');
+    
+    fetch(`/tweet/${tweetId}/cancel-schedule/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrftoken,
+            'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Remove tweet from DOM
+            const tweetCard = document.querySelector(`[data-tweet-id="${tweetId}"]`);
+            if (tweetCard) {
+                tweetCard.style.transition = 'opacity 0.3s';
+                tweetCard.style.opacity = '0';
+                setTimeout(() => {
+                    tweetCard.remove();
+                }, 300);
+            }
+            
+            showMessage('Scheduled tweet cancelled!', 'success');
+        } else {
+            showMessage(data.error || 'Failed to cancel scheduled tweet', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('An error occurred', 'error');
+    });
+    
+    return false;
+}

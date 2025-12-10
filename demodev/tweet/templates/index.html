@@ -488,7 +488,9 @@
         <div class="tweets-grid">
             {% for tweet in tweets %}
                 <div class="tweet-card" data-tweet-id="{{ tweet.id }}">
-                    {% if tweet.photo %}
+                    {% if tweet.media.all %}
+                        <img src="{{ tweet.media.first.file.url }}" alt="Tweet media" class="tweet-image">
+                    {% elif tweet.photo %}
                         <img src="{{tweet.photo.url}}" alt="Tweet image" class="tweet-image">
                     {% else %}
                         <div class="tweet-image-placeholder">

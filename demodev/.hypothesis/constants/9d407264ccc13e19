@@ -1,0 +1,4 @@
+# file: C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\settings.py
+# hypothesis_version: 6.148.7
+
+['()', '/media/', '/tweets/', '127.0.0.1', 'APP_DIRS', 'BACKEND', 'DEBUG', 'DIRS', 'ENGINE', 'ERROR', 'INFO', 'NAME', 'OPTIONS', 'UTC', '[::1]', 'app.log', 'class', 'console', 'context_processors', 'db.sqlite3', 'default', 'demodev', 'demodev.urls', 'django', 'django.contrib.admin', 'django.contrib.auth', 'en-us', 'error_file', 'errors.log', 'file', 'filename', 'filters', 'format', 'formatter', 'formatters', 'handlers', 'level', 'localhost', 'loggers', 'logging.FileHandler', 'login', 'logs', 'media', 'propagate', 'require_debug_false', 'require_debug_true', 'simple', 'static', 'static/', 'style', 'templates', 'tweet', 'verbose', 'version', '{']
