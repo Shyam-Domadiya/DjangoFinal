@@ -18,9 +18,18 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from decouple import config
+
+# Secure admin path - use environment variable or default to secure path
+ADMIN_PATH = config('ADMIN_PATH', default='secure-admin-panel-7x9k2m')
+
+# Customize admin site
+admin.site.site_header = "System Administration"
+admin.site.site_title = "Admin"
+admin.site.index_title = "Welcome"
 
 urlpatterns = [
-    path('zeezee/', admin.site.urls),
+    path(f'{ADMIN_PATH}/', admin.site.urls),
     path('', include('tweet.urls')),
     path('api/', include('tweet.api_urls')),
     path('api-auth/', include('rest_framework.urls')),
