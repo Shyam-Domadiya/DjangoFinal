@@ -5116,3 +5116,7 @@ INFO 2025-12-10 17:29:13,057 autoreload 5472 3480 C:\Users\shyam\OneDrive\Deskto
 INFO 2025-12-10 17:29:14,879 autoreload 16024 19064 Watching for file changes with StatReloader
 INFO 2025-12-10 17:46:16,887 autoreload 16024 19064 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
 INFO 2025-12-10 17:46:17,981 autoreload 2960 16240 Watching for file changes with StatReloader
+INFO 2025-12-10 17:57:29,122 autoreload 2960 16240 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
+INFO 2025-12-10 17:57:30,189 autoreload 16880 15552 Watching for file changes with StatReloader
+INFO 2025-12-10 17:57:35,754 autoreload 16880 15552 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
+INFO 2025-12-10 17:57:36,666 autoreload 18004 15728 Watching for file changes with StatReloader
