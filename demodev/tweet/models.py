@@ -511,3 +511,355 @@ def update_analytics_on_bookmark(sender, instance, created, **kwargs):
             analytics.save()
         except TweetAnalytics.DoesNotExist:
             pass
+
+
+# ============================================================================
+# PHASE 3: DIRECT MESSAGING SYSTEM MODELS
+# ============================================================================
+
+class Conversation(models.Model):
+    """Represents a direct message conversation between two users"""
+    participant_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations_as_p1')
+    participant_2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations_as_p2')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # Archive status (per-user)
+    is_archived_by_p1 = models.BooleanField(default=False)
+    is_archived_by_p2 = models.BooleanField(default=False)
+    
+    # Mute status (per-user)
+    is_muted_by_p1 = models.BooleanField(default=False)
+    is_muted_by_p2 = models.BooleanField(default=False)
+    
+    # Block status (one-directional)
+    p1_blocked_p2 = models.BooleanField(default=False)
+    p2_blocked_p1 = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('participant_1', 'participant_2')
+        ordering = ['-updated_at']
+        indexes = [
+            models.Index(fields=['participant_1', '-updated_at']),
+            models.Index(fields=['participant_2', '-updated_at']),
+        ]
+
+    def __str__(self):
+        return f'Conversation: {self.participant_1.username} <-> {self.participant_2.username}'
+
+    def get_other_participant(self, user):
+        """Get the other user in the conversation"""
+        if user == self.participant_1:
+            return self.participant_2
+        elif user == self.participant_2:
+            return self.participant_1
+        return None
+
+    def get_last_message(self):
+        """Get the most recent message in the conversation"""
+        return self.messages.filter(is_deleted=False).order_by('-created_at').first()
+
+    def get_unread_count(self, user):
+        """Get count of unread messages for a specific user"""
+        if user == self.participant_1:
+            return self.messages.filter(sender=self.participant_2, is_read=False).count()
+        elif user == self.participant_2:
+            return self.messages.filter(sender=self.participant_1, is_read=False).count()
+        return 0
+
+    def archive(self, user):
+        """Archive conversation for a specific user"""
+        if user == self.participant_1:
+            self.is_archived_by_p1 = True
+        elif user == self.participant_2:
+            self.is_archived_by_p2 = True
+        self.save()
+
+    def unarchive(self, user):
+        """Unarchive conversation for a specific user"""
+        if user == self.participant_1:
+            self.is_archived_by_p1 = False
+        elif user == self.participant_2:
+            self.is_archived_by_p2 = False
+        self.save()
+
+    def mute(self, user):
+        """Mute notifications for a specific user"""
+        if user == self.participant_1:
+            self.is_muted_by_p1 = True
+        elif user == self.participant_2:
+            self.is_muted_by_p2 = True
+        self.save()
+
+    def unmute(self, user):
+        """Unmute notifications for a specific user"""
+        if user == self.participant_1:
+            self.is_muted_by_p1 = False
+        elif user == self.participant_2:
+            self.is_muted_by_p2 = False
+        self.save()
+
+    def block_user(self, blocker, blocked):
+        """Block a user from sending messages"""
+        if blocker == self.participant_1 and blocked == self.participant_2:
+            self.p1_blocked_p2 = True
+        elif blocker == self.participant_2 and blocked == self.participant_1:
+            self.p2_blocked_p1 = True
+        self.save()
+
+    def unblock_user(self, blocker, blocked):
+        """Unblock a user"""
+        if blocker == self.participant_1 and blocked == self.participant_2:
+            self.p1_blocked_p2 = False
+        elif blocker == self.participant_2 and blocked == self.participant_1:
+            self.p2_blocked_p1 = False
+        self.save()
+
+    def is_user_blocked(self, sender):
+        """Check if sender is blocked from sending messages"""
+        if sender == self.participant_1:
+            return self.p1_blocked_p2
+        elif sender == self.participant_2:
+            return self.p2_blocked_p1
+        return False
+
+
+class Message(models.Model):
+    """Represents a single direct message"""
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    content = models.TextField(max_length=5000)
+    
+    # Read status
+    is_read = models.BooleanField(default=False)
+    read_at = models.DateTimeField(null=True, blank=True)
+    
+    # Edit tracking
+    is_edited = models.BooleanField(default=False)
+    edited_at = models.DateTimeField(null=True, blank=True)
+    
+    # Soft deletion
+    is_deleted = models.BooleanField(default=False)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['conversation', '-created_at']),
+            models.Index(fields=['sender', '-created_at']),
+            models.Index(fields=['is_read', '-created_at']),
+        ]
+
+    def __str__(self):
+        return f'Message from {self.sender.username} in conversation {self.conversation.id}'
+
+    def mark_as_read(self):
+        """Mark message as read and record timestamp"""
+        if not self.is_read:
+            self.is_read = True
+            self.read_at = timezone.now()
+            self.save()
+
+    def edit_content(self, new_content):
+        """Update message content and track edit"""
+        self.content = new_content
+        self.is_edited = True
+        self.edited_at = timezone.now()
+        self.save()
+
+    def soft_delete(self):
+        """Mark message as deleted without removing from DB"""
+        self.is_deleted = True
+        self.save()
+
+    def get_display_content(self):
+        """Return content or '[deleted]' if removed"""
+        if self.is_deleted:
+            return '[deleted]'
+        return self.content
+
+
+class ReadReceipt(models.Model):
+    """Track message read status with timestamps"""
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='read_receipts')
+    reader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='read_receipts')
+    read_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('message', 'reader')
+        ordering = ['-read_at']
+        indexes = [
+            models.Index(fields=['reader', '-read_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.reader.username} read message {self.message.id}'
+
+
+class TypingIndicator(models.Model):
+    """Track typing status in real-time (ephemeral, short TTL)"""
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='typing_indicators')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='typing_indicators')
+    started_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+
+    class Meta:
+        unique_together = ('conversation', 'user')
+        ordering = ['-started_at']
+        indexes = [
+            models.Index(fields=['conversation', 'expires_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.user.username} typing in conversation {self.conversation.id}'
+
+    def is_active(self):
+        """Check if typing indicator is still valid"""
+        return timezone.now() < self.expires_at
+
+    def extend(self):
+        """Extend expiration time by 3 seconds"""
+        self.expires_at = timezone.now() + timezone.timedelta(seconds=3)
+        self.save()
+
+    def save(self, *args, **kwargs):
+        """Override save to set expiration time if not already set"""
+        if not self.expires_at:
+            self.expires_at = timezone.now() + timezone.timedelta(seconds=3)
+        super().save(*args, **kwargs)
+
+
+class MessageAttachment(models.Model):
+    """Store file attachments in messages"""
+    FILE_TYPE_CHOICES = [
+        ('image', 'Image'),
+        ('document', 'Document'),
+        ('video', 'Video'),
+        ('audio', 'Audio'),
+        ('other', 'Other'),
+    ]
+
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='attachments')
+    file = models.FileField(upload_to='dm_attachments/%Y/%m/%d/')
+    file_type = models.CharField(max_length=20, choices=FILE_TYPE_CHOICES, default='other')
+    file_size = models.IntegerField()  # in bytes
+    file_name = models.CharField(max_length=255)
+    thumbnail = models.ImageField(upload_to='dm_thumbnails/', null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+        indexes = [
+            models.Index(fields=['message', '-uploaded_at']),
+        ]
+
+    def __str__(self):
+        return f'Attachment: {self.file_name} in message {self.message.id}'
+
+    def validate_file(self):
+        """Validate file type and size (max 10MB)"""
+        MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
+        
+        if self.file_size > MAX_FILE_SIZE:
+            raise ValueError(f'File size exceeds maximum of 10MB')
+        
+        # Validate file type based on MIME type
+        valid_types = [
+            'image/jpeg', 'image/png', 'image/gif', 'image/webp',
+            'application/pdf', 'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'video/mp4', 'video/quicktime',
+            'audio/mpeg', 'audio/wav',
+        ]
+        
+        # Get MIME type from file
+        import mimetypes
+        mime_type, _ = mimetypes.guess_type(self.file.name)
+        
+        if mime_type and mime_type not in valid_types:
+            raise ValueError(f'File type {mime_type} is not allowed')
+
+    def get_thumbnail(self):
+        """Generate thumbnail for images"""
+        if self.file_type == 'image' and not self.thumbnail:
+            try:
+                from django.core.files.base import ContentFile
+                
+                img = Image.open(self.file)
+                img.thumbnail((200, 200))
+                thumb_io = BytesIO()
+                img.save(thumb_io, format='JPEG')
+                thumb_io.seek(0)
+                
+                thumb_name = f'thumb_{self.file.name.split("/")[-1]}'
+                self.thumbnail.save(thumb_name, ContentFile(thumb_io.getvalue()), save=False)
+            except Exception as e:
+                print(f'Error generating thumbnail: {e}')
+
+    def delete_file(self):
+        """Remove file from storage"""
+        if self.file:
+            if os.path.isfile(self.file.path):
+                os.remove(self.file.path)
+            self.file.delete(save=False)
+        if self.thumbnail:
+            if os.path.isfile(self.thumbnail.path):
+                os.remove(self.thumbnail.path)
+            self.thumbnail.delete(save=False)
+
+    def save(self, *args, **kwargs):
+        """Override save to calculate file size and generate thumbnail"""
+        if self.file:
+            self.file_size = self.file.size
+            self.get_thumbnail()
+        super().save(*args, **kwargs)
+
+
+class ConversationMute(models.Model):
+    """Track mute preferences for conversations (alternative model for flexibility)"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='muted_conversations')
+    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='mutes')
+    muted_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'conversation')
+        ordering = ['-muted_at']
+        indexes = [
+            models.Index(fields=['user', 'conversation']),
+        ]
+
+    def __str__(self):
+        return f'{self.user.username} muted conversation {self.conversation.id}'
+
+
+class BlockedUserDM(models.Model):
+    """Track blocked users in DM context"""
+    blocker = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocked_users_dm')
+    blocked_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocked_by_dm')
+    blocked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('blocker', 'blocked_user')
+        ordering = ['-blocked_at']
+        indexes = [
+            models.Index(fields=['blocker', 'blocked_user']),
+        ]
+
+    def __str__(self):
+        return f'{self.blocker.username} blocked {self.blocked_user.username} in DM'
+
+
+# ============================================================================
+# SIGNAL HANDLERS FOR PHASE 3 MODELS
+# ============================================================================
+
+@receiver(models.signals.pre_delete, sender=MessageAttachment)
+def delete_attachment_files(sender, instance, **kwargs):
+    """Delete attachment files when MessageAttachment is deleted"""
+    instance.delete_file()

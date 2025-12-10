@@ -5079,3 +5079,21 @@ INFO 2025-12-10 15:53:21,777 basehttp 24096 23412 "GET / HTTP/1.1" 200 43660
 INFO 2025-12-10 15:53:31,773 basehttp 24096 21608 "GET / HTTP/1.1" 200 43660
 INFO 2025-12-10 15:53:41,769 basehttp 24096 17096 "GET / HTTP/1.1" 200 43660
 INFO 2025-12-10 15:56:01,165 basehttp 24096 19888 "GET / HTTP/1.1" 200 48119
+INFO 2025-12-10 16:09:07,435 autoreload 26860 26340 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\models.py changed, reloading.
+INFO 2025-12-10 16:09:07,452 autoreload 24096 15872 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\tweet\models.py changed, reloading.
+INFO 2025-12-10 16:09:08,787 autoreload 17752 25168 Watching for file changes with StatReloader
+INFO 2025-12-10 16:09:08,787 autoreload 17620 11292 Watching for file changes with StatReloader
+INFO 2025-12-10 16:18:22,957 autoreload 356 17484 Watching for file changes with StatReloader
+INFO 2025-12-10 16:18:29,673 basehttp 17752 14556 "GET / HTTP/1.1" 200 48119
+INFO 2025-12-10 16:18:29,771 basehttp 17752 14556 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 304 0
+INFO 2025-12-10 16:18:29,771 basehttp 17752 13024 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 304 0
+INFO 2025-12-10 16:18:29,803 basehttp 17752 13024 "GET /static/js/tweets.js HTTP/1.1" 304 0
+INFO 2025-12-10 16:18:29,804 basehttp 17752 14556 "GET /static/js/auto-refresh.js HTTP/1.1" 304 0
+INFO 2025-12-10 16:18:31,515 basehttp 17752 14556 "GET / HTTP/1.1" 200 48119
+INFO 2025-12-10 16:18:32,572 basehttp 17752 14556 "GET /tweets/ HTTP/1.1" 200 46035
+INFO 2025-12-10 16:18:33,752 basehttp 17752 14556 "GET /search/ HTTP/1.1" 200 36587
+INFO 2025-12-10 16:18:40,029 error_handlers 17752 23412 Search query validation passed: 'Shyam'
+INFO 2025-12-10 16:18:40,045 error_handlers 17752 23412 Search performed: 'Shyam' returned 1 results
+INFO 2025-12-10 16:18:40,052 basehttp 17752 23412 "GET /search/?q=Shyam HTTP/1.1" 200 38857
+INFO 2025-12-10 16:18:42,927 basehttp 17752 23412 "GET /follow/10/ HTTP/1.1" 302 0
+INFO 2025-12-10 16:18:42,947 basehttp 17752 23412 "GET /users/ HTTP/1.1" 200 35531
