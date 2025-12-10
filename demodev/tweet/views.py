@@ -336,4 +336,3 @@ def refresh_content(request):
     
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
 
-
