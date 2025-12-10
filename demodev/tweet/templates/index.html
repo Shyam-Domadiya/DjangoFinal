@@ -27,19 +27,57 @@
     }
 
     .index-header .btn-create {
-        background-color: var(--success-color);
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
         color: white;
-        padding: 10px 20px;
-        border-radius: 6px;
+        padding: 12px 24px;
+        border-radius: 12px;
         text-decoration: none;
         font-weight: 600;
-        transition: background-color 0.2s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         border: none;
         cursor: pointer;
+        box-shadow: 0 4px 15px var(--glow-success);
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .index-header .btn-create::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
     }
 
     .index-header .btn-create:hover {
-        background-color: var(--success-hover);
+        background: linear-gradient(135deg, var(--success-hover) 0%, var(--success-color) 100%);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px var(--glow-success);
+        color: white;
+        text-decoration: none;
+    }
+
+    .index-header .btn-create:hover::before {
+        left: 100%;
+    }
+
+    .index-header .btn-create:active {
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    .index-header .btn-create i {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .index-header .btn-create:hover i {
+        transform: rotate(90deg) scale(1.1);
     }
 
     .tweets-grid {
@@ -291,18 +329,55 @@
     }
 
     .empty-state-link {
-        display: inline-block;
-        background-color: var(--success-color);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-hover) 100%);
         color: white;
-        padding: 10px 20px;
-        border-radius: 6px;
+        padding: 12px 24px;
+        border-radius: 12px;
         text-decoration: none;
         font-weight: 600;
-        transition: background-color 0.2s;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px var(--glow-success);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .empty-state-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
     }
 
     .empty-state-link:hover {
-        background-color: var(--success-hover);
+        background: linear-gradient(135deg, var(--success-hover) 0%, var(--success-color) 100%);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px var(--glow-success);
+        color: white;
+        text-decoration: none;
+    }
+
+    .empty-state-link:hover::before {
+        left: 100%;
+    }
+
+    .empty-state-link:active {
+        transform: translateY(-1px) scale(1.02);
+        box-shadow: 0 4px 15px var(--glow-success);
+    }
+
+    .empty-state-link i {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .empty-state-link:hover i {
+        transform: rotate(90deg) scale(1.1);
     }
 
     /* Light theme specific enhancements */
