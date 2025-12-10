@@ -5097,3 +5097,22 @@ INFO 2025-12-10 16:18:40,045 error_handlers 17752 23412 Search performed: 'Shyam
 INFO 2025-12-10 16:18:40,052 basehttp 17752 23412 "GET /search/?q=Shyam HTTP/1.1" 200 38857
 INFO 2025-12-10 16:18:42,927 basehttp 17752 23412 "GET /follow/10/ HTTP/1.1" 302 0
 INFO 2025-12-10 16:18:42,947 basehttp 17752 23412 "GET /users/ HTTP/1.1" 200 35531
+INFO 2025-12-10 17:15:32,435 autoreload 26392 15072 Watching for file changes with StatReloader
+INFO 2025-12-10 17:15:40,321 basehttp 26392 26244 "GET / HTTP/1.1" 200 48119
+INFO 2025-12-10 17:15:40,554 basehttp 26392 26364 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,554 basehttp 26392 26244 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,599 basehttp 26392 26364 "GET /static/js/comments.js HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,600 basehttp 26392 26244 "GET /static/js/likes.js HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,630 basehttp 26392 3416 "GET /static/js/tweets.js HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,636 basehttp 26392 21048 "GET /static/js/theme-toggle.js HTTP/1.1" 304 0
+INFO 2025-12-10 17:15:40,637 basehttp 26392 23972 "GET /static/js/auto-refresh.js HTTP/1.1" 304 0
+WARNING 2025-12-10 17:15:40,862 log 26392 23972 Not Found: /favicon.ico
+WARNING 2025-12-10 17:15:40,863 basehttp 26392 23972 "GET /favicon.ico HTTP/1.1" 404 9507
+WARNING 2025-12-10 17:17:04,972 log 26392 22832 Not Found: /favicon.ico
+WARNING 2025-12-10 17:17:04,984 basehttp 26392 22832 "GET /favicon.ico HTTP/1.1" 404 9507
+INFO 2025-12-10 17:18:40,403 autoreload 26392 15072 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-10 17:18:45,084 autoreload 5472 3480 Watching for file changes with StatReloader
+INFO 2025-12-10 17:29:13,057 autoreload 5472 3480 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-10 17:29:14,879 autoreload 16024 19064 Watching for file changes with StatReloader
+INFO 2025-12-10 17:46:16,887 autoreload 16024 19064 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
+INFO 2025-12-10 17:46:17,981 autoreload 2960 16240 Watching for file changes with StatReloader
