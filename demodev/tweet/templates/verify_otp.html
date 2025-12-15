@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+
+{% block title %}Verify OTP - Tweet App{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-2">Verify OTP</h2>
+                    
+                    <p class="text-muted text-center mb-4">
+                        We've sent a 6-digit OTP to <strong>{{ user.email }}</strong>
+                    </p>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Time Remaining:</strong> 
+                        <span id="timer">{{ minutes_remaining }}:{{ seconds_remaining|stringformat:"02d" }}</span>
+                    </div>
+                    
+                    <form method="POST" id="otp-form">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_otp_code" class="form-label">Enter OTP</label>
+                            {{ form.otp_code }}
+                            {% if form.otp_code.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.otp_code.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <p class="text-muted small">
+                            <strong>Attempts Remaining:</strong> {{ attempts_remaining }}/{{ otp.max_attempts }}
+                        </p>
+                        
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-check"></i> Verify OTP
+                        </button>
+                    </form>
+                    
+                    <hr>
+                    
+                    <div class="text-center">
+                        <p class="text-muted small mb-2">Didn't receive the OTP?</p>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" id="resend-btn" onclick="resendOTP()">
+                            <i class="fas fa-redo"></i> Resend OTP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 18px;
+        letter-spacing: 5px;
+        text-align: center;
+    }
+    
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .btn-primary {
+        border-radius: 8px;
+        padding: 10px;
+        font-weight: 500;
+    }
+    
+    .card {
+        border: none;
+        border-radius: 12px;
+    }
+    
+    #timer {
+        font-weight: bold;
+        color: #dc3545;
+    }
+</style>
+
+<script>
+    // Timer countdown
+    let timeRemaining = {{ minutes_remaining }} * 60 + {{ seconds_remaining }};
+    
+    function updateTimer() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById('timer').textContent = 
+            minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        
+        if (timeRemaining > 0) {
+            timeRemaining--;
+            setTimeout(updateTimer, 1000);
+        } else {
+            document.getElementById('timer').textContent = 'Expired';
+            document.getElementById('otp-form').style.display = 'none';
+            alert('OTP has expired. Please request a new one.');
+        }
+    }
+    
+    updateTimer();
+    
+    // Resend OTP
+    function resendOTP() {
+        const btn = document.getElementById('resend-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        fetch('{% url "resend_otp" user.id %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert('Error: ' + data.error);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-redo"></i> Resend OTP';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-redo"></i> Resend OTP';
+        });
+    }
+    
+    // Auto-focus on OTP input
+    document.getElementById('id_otp_code').focus();
+</script>
+{% endblock %}

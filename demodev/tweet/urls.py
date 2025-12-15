@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .otp_views import forgot_password, verify_otp, reset_password, resend_otp
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -40,4 +41,10 @@ urlpatterns = [
     path('scheduled-tweets/', views.get_scheduled_tweets, name='get_scheduled_tweets'),
     path('tweet/<int:tweet_id>/cancel-schedule/', views.cancel_scheduled_tweet, name='cancel_scheduled_tweet'),
     path('admin/publish-scheduled/', views.publish_scheduled_tweets_manual, name='publish_scheduled_tweets_manual'),
+    
+    # OTP Password Reset URLs
+    path('forgot-password/', forgot_password, name='forgot_password'),
+    path('verify-otp/<int:user_id>/', verify_otp, name='verify_otp'),
+    path('reset-password/<int:user_id>/', reset_password, name='reset_password'),
+    path('resend-otp/<int:user_id>/', resend_otp, name='resend_otp'),
 ]
