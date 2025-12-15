@@ -3,7 +3,7 @@ services:
     name: twitter-dm-app
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && python demodev/manage.py collectstatic --noinput && python demodev/manage.py migrate
+    buildCommand: pip install -r requirements.txt && cd demodev && python manage.py collectstatic --noinput && python manage.py migrate
     startCommand: cd demodev && gunicorn demodev.wsgi:application
     envVars:
       - key: DEBUG
@@ -18,6 +18,20 @@ services:
         value: "tweetapp-wn3f.onrender.com,*.onrender.com,localhost,127.0.0.1"
       - key: PYTHONUNBUFFERED
         value: "1"
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        value: ""
+      - key: EMAIL_HOST_PASSWORD
+        value: ""
+      - key: DEFAULT_FROM_EMAIL
+        value: ""
 
 databases:
   - name: twitter-db
