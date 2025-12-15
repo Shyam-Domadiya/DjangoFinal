@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .content {
+            padding: 30px;
+            color: #333;
+        }
+        .content p {
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        .verification-link {
+            display: inline-block;
+            background-color: #667eea;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .verification-link:hover {
+            background-color: #764ba2;
+        }
+        .footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Tweet App! 🎉</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hi <strong>{{ user.username }}</strong>,</p>
+            
+            <p>Thank you for registering with Tweet App! To complete your registration and activate your account, please click the button below:</p>
+            
+            <div style="text-align: center;">
+                <a href="{{ protocol }}://{{ domain }}{% url 'activate_email' uidb64=uid token=token %}" class="verification-link">
+                    Verify Email Address
+                </a>
+            </div>
+            
+            <p>Or copy and paste this link in your browser:</p>
+            <p style="word-break: break-all; background-color: #f5f5f5; padding: 10px; border-radius: 4px; font-size: 12px;">
+                {{ protocol }}://{{ domain }}{% url 'activate_email' uidb64=uid token=token %}
+            </p>
+            
+            <div class="warning">
+                <strong>⚠️ Security Note:</strong> This link will expire in 24 hours. If you didn't create this account, please ignore this email.
+            </div>
+            
+            <p>Once you verify your email, you'll be able to:</p>
+            <ul>
+                <li>Login to your account</li>
+                <li>Create and share tweets</li>
+                <li>Follow other users</li>
+                <li>Engage with the community</li>
+            </ul>
+            
+            <p>If you have any questions, feel free to reach out to our support team.</p>
+            
+            <p>Best regards,<br><strong>Tweet App Team</strong></p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Tweet App. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply to this message.</p>
+        </div>
+    </div>
+</body>
+</html>

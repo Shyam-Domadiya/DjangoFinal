@@ -10,6 +10,7 @@ urlpatterns = [
     path('<int:tweet_id>/delete', views.Tweet_Delete, name='tweet_delete'),
     path('<int:tweet_id>/edit', views.Tweet_Edit, name='tweet_edit'),
     path('register/', views.register, name='register'),
+    path('activate/<uidb64>/<token>/', views.activate_email, name='activate_email'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', views.user_logout, name='logout'),
     path('users/', views.user_list, name='user_list'),

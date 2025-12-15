@@ -5,11 +5,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db import models
 from django.db.models import Count, Q
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import EmailMessage
+from .tokens import email_verification_token
 from .error_handlers import (
     handle_file_upload_error, handle_search_error, handle_tweet_edit_error,
     handle_scheduling_error, validate_file_upload, validate_tweet_edit,
@@ -175,13 +181,47 @@ def Tweet_Delete(request, tweet_id):
     return render(request, 'tweet_confirm_delete.html', {'tweet': tweet})
 
 def register(request):
+    """Register a new user and send email verification link"""
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, 'Registration successful! Welcome!')
-            return redirect('tweet_list')
+            try:
+                # Create user but keep inactive until email verification
+                user = form.save(commit=False)
+                user.is_active = False
+                user.save()
+                
+                # Generate verification token and link
+                current_site = get_current_site(request)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                token = email_verification_token.make_token(user)
+                
+                # Prepare email
+                mail_subject = 'Verify your email - Tweet App'
+                message = render_to_string('email_verification.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': uid,
+                    'token': token,
+                    'protocol': 'https' if request.is_secure() else 'http',
+                })
+                
+                email = EmailMessage(
+                    mail_subject,
+                    message,
+                    from_email='noreply@tweetapp.com',
+                    to=[user.email]
+                )
+                email.send()
+                
+                logger.info(f"Verification email sent to {user.email}", extra={'user_id': user.id})
+                messages.success(request, 'Registration successful! Please check your email to verify your account.')
+                
+                return render(request, 'check_email.html', {'email': user.email})
+            
+            except Exception as e:
+                logger.error(f"Error during registration: {str(e)}", exc_info=True)
+                messages.error(request, 'An error occurred during registration. Please try again.')
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -189,6 +229,29 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
+
+
+def activate_email(request, uidb64, token):
+    """Activate user account via email verification link"""
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    
+    if user and email_verification_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        
+        logger.info(f"Email verified for user {user.username}", extra={'user_id': user.id})
+        messages.success(request, 'Email verified successfully! You can now login.')
+        
+        return redirect('login')
+    else:
+        logger.warning(f"Invalid or expired verification link attempted")
+        messages.error(request, 'Activation link is invalid or has expired.')
+        
+        return redirect('register')
 
 def user_logout(request):
     logout(request)

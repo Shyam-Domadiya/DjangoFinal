@@ -1,0 +1,164 @@
+{% extends 'layout.html' %}
+
+{% block title %}Check Your Email - Tweet App{% endblock %}
+
+{% block content %}
+<style>
+    .check-email-container {
+        max-width: 500px;
+        margin: 80px auto;
+        padding: 0 20px;
+    }
+
+    .check-email-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .check-email-body {
+        padding: 50px 30px;
+        text-align: center;
+        color: white;
+    }
+
+    .check-email-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+
+    .check-email-body h1 {
+        font-size: 28px;
+        margin: 20px 0 10px 0;
+        font-weight: 700;
+    }
+
+    .check-email-body p {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 15px 0;
+        opacity: 0.95;
+    }
+
+    .email-highlight {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-weight: 600;
+        margin: 20px 0;
+        word-break: break-all;
+    }
+
+    .steps {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: left;
+    }
+
+    .steps ol {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .steps li {
+        margin: 10px 0;
+        line-height: 1.6;
+    }
+
+    .resend-section {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .resend-link {
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .resend-link:hover {
+        opacity: 0.8;
+    }
+
+    .back-to-login {
+        margin-top: 20px;
+    }
+
+    .back-to-login a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        opacity: 0.9;
+    }
+
+    .back-to-login a:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+
+    /* Light theme support */
+    [data-bs-theme="light"] .check-email-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    [data-bs-theme="light"] .check-email-body {
+        color: white;
+    }
+
+    [data-bs-theme="light"] .email-highlight {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+    }
+
+    [data-bs-theme="light"] .steps {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+</style>
+
+<div class="check-email-container">
+    <div class="check-email-card">
+        <div class="check-email-body">
+            <div class="check-email-icon">✉️</div>
+            
+            <h1>Check Your Email</h1>
+            <p>We've sent a verification link to:</p>
+            
+            <div class="email-highlight">
+                {{ email }}
+            </div>
+            
+            <div class="steps">
+                <ol>
+                    <li>Open your email inbox</li>
+                    <li>Look for an email from <strong>Tweet App</strong></li>
+                    <li>Click the <strong>"Verify Email Address"</strong> button</li>
+                    <li>Your account will be activated immediately</li>
+                </ol>
+            </div>
+            
+            <p style="font-size: 14px; opacity: 0.85;">
+                <strong>💡 Tip:</strong> Check your spam or promotions folder if you don't see the email.
+            </p>
+            
+            <div class="resend-section">
+                <p style="margin-bottom: 10px;">Didn't receive the email?</p>
+                <p style="font-size: 14px;">
+                    <a href="{% url 'register' %}" class="resend-link">Try registering again</a>
+                </p>
+            </div>
+            
+            <div class="back-to-login">
+                <p style="font-size: 14px; margin-bottom: 0;">
+                    Already verified? <a href="{% url 'login' %}">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
