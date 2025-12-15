@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
+from django.http import JsonResponse
 from .models import OTPVerification
 from .forms import ForgotPasswordForm, OTPVerificationForm, ResetPasswordForm
 import logging
@@ -225,7 +226,6 @@ Tweet App Team
             
             logger.info(f"OTP resent to {user.email}", extra={'user_id': user.id})
             
-            from django.http import JsonResponse
             return JsonResponse({
                 'success': True,
                 'message': 'OTP resent successfully!'
@@ -244,5 +244,4 @@ Tweet App Team
                 'error': 'An error occurred while resending the OTP.'
             }, status=500)
     
-    from django.http import JsonResponse
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
