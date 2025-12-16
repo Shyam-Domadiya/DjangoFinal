@@ -217,6 +217,7 @@ CACHES = {
 }
 
 # Logging configuration
+# For production (Render), use console only. For development, use file logging.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -244,32 +245,42 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
         },
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'app.log'),
-            'formatter': 'verbose',
-        },
-        'error_file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'errors.log'),
-            'formatter': 'verbose',
-        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': False,
         },
         'tweet': {
-            'handlers': ['console', 'file', 'error_file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
         },
     },
 }
+
+# Add file logging only in development mode
+if DEBUG:
+    # Create logs directory if it doesn't exist
+    logs_dir = os.path.join(BASE_DIR, 'logs')
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    LOGGING['handlers']['file'] = {
+        'level': 'INFO',
+        'class': 'logging.FileHandler',
+        'filename': os.path.join(logs_dir, 'app.log'),
+        'formatter': 'verbose',
+    }
+    LOGGING['handlers']['error_file'] = {
+        'level': 'ERROR',
+        'class': 'logging.FileHandler',
+        'filename': os.path.join(logs_dir, 'errors.log'),
+        'formatter': 'verbose',
+    }
+    LOGGING['loggers']['django']['handlers'] = ['console', 'file']
+    LOGGING['loggers']['tweet']['handlers'] = ['console', 'file', 'error_file']
 
 
 # ============================================================================
