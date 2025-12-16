@@ -247,10 +247,6 @@ LOGGING = {
             'style': '{',
             'datefmt': '%Y-%m-%d %H:%M:%S',
         },
-        'json': {
-            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
-            'format': '%(asctime)s %(name)s %(levelname)s %(message)s'
-        } if 'pythonjsonlogger' in str(INSTALLED_APPS) else None,
     },
     'filters': {
         'require_debug_false': {
