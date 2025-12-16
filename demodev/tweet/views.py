@@ -1220,3 +1220,167 @@ def publish_scheduled_tweets_manual(request):
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+
+
+
+# ============================================================================
+# PASSWORD RESET VIEWS - PRODUCTION GRADE WITH HTTPS SUPPORT
+# ============================================================================
+
+def password_reset_request(request):
+    """
+    Handle password reset request.
+    User enters their email and receives a password reset link via email.
+    Supports HTTPS protocol for secure links.
+    """
+    if request.method == 'POST':
+        from .forms import CustomPasswordResetForm
+        form = CustomPasswordResetForm(request.POST)
+        
+        if form.is_valid():
+            try:
+                # Save form (sends email with HTTPS support)
+                form.save(request)
+                
+                logger.info(
+                    f"Password reset email sent to: {form.cleaned_data['email']}",
+                    extra={'ip': request.META.get('REMOTE_ADDR')}
+                )
+                
+                messages.success(
+                    request,
+                    '✅ Password reset link has been sent to your email. '
+                    'Please check your inbox and follow the link to reset your password. '
+                    'The link will expire in 24 hours.'
+                )
+                
+                return redirect('password_reset_done')
+            
+            except Exception as e:
+                logger.error(
+                    f"Error in password reset request: {str(e)}",
+                    exc_info=True,
+                    extra={'ip': request.META.get('REMOTE_ADDR')}
+                )
+                messages.error(
+                    request,
+                    '❌ An error occurred while processing your request. '
+                    'Please try again later.'
+                )
+        else:
+            # Display form validation errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"❌ {error}")
+    else:
+        from .forms import CustomPasswordResetForm
+        form = CustomPasswordResetForm()
+    
+    return render(request, 'password/password_reset.html', {'form': form})
+
+
+def password_reset_done(request):
+    """
+    Display confirmation message after password reset email is sent.
+    """
+    return render(request, 'password/password_reset_done.html')
+
+
+def password_reset_confirm(request, uidb64, token):
+    """
+    Handle password reset confirmation.
+    User clicks the link from email and sets a new password.
+    Validates token and UID before allowing password change.
+    """
+    from django.contrib.auth.tokens import default_token_generator
+    from django.utils.http import urlsafe_base64_decode
+    from django.utils.encoding import force_str
+    from .forms import CustomSetPasswordForm
+    
+    try:
+        # Decode UID
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+        logger.warning(
+            f"Invalid password reset attempt with uidb64: {uidb64}",
+            extra={'ip': request.META.get('REMOTE_ADDR')}
+        )
+    
+    # Validate token
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = CustomSetPasswordForm(user, request.POST)
+            
+            if form.is_valid():
+                try:
+                    # Save new password
+                    form.save()
+                    
+                    logger.info(
+                        f"Password successfully reset for user: {user.username}",
+                        extra={'user_id': user.id, 'ip': request.META.get('REMOTE_ADDR')}
+                    )
+                    
+                    messages.success(
+                        request,
+                        '✅ Your password has been successfully reset! '
+                        'You can now login with your new password.'
+                    )
+                    
+                    return redirect('password_reset_complete')
+                
+                except Exception as e:
+                    logger.error(
+                        f"Error saving new password for user {user.username}: {str(e)}",
+                        exc_info=True,
+                        extra={'user_id': user.id}
+                    )
+                    messages.error(
+                        request,
+                        '❌ An error occurred while saving your new password. '
+                        'Please try again.'
+                    )
+            else:
+                # Display form validation errors
+                for field, errors in form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"❌ {error}")
+        else:
+            form = CustomSetPasswordForm(user)
+        
+        return render(
+            request,
+            'password/password_reset_confirm.html',
+            {
+                'form': form,
+                'validlink': True,
+                'user': user,
+            }
+        )
+    else:
+        # Invalid or expired token
+        logger.warning(
+            f"Invalid or expired password reset token for user: {user.username if user else 'Unknown'}",
+            extra={'ip': request.META.get('REMOTE_ADDR')}
+        )
+        
+        messages.error(
+            request,
+            '❌ The password reset link is invalid or has expired. '
+            'Please request a new password reset link.'
+        )
+        
+        return render(
+            request,
+            'password/password_reset_confirm.html',
+            {'validlink': False}
+        )
+
+
+def password_reset_complete(request):
+    """
+    Display success message after password has been reset.
+    """
+    return render(request, 'password/password_reset_complete.html')

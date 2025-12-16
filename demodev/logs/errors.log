@@ -1,0 +1,12 @@
+ERROR 2025-12-16 12:12:56,194 forgot_password_views 17744 22616 Error sending password reset email: 'EmailMultiAlternatives' object does not support item assignment
+Traceback (most recent call last):
+  File "C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py", line 107, in forgot_password
+    email_message['X-Priority'] = '3'
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+TypeError: 'EmailMultiAlternatives' object does not support item assignment
+ERROR 2025-12-16 12:15:00,681 forgot_password_views 4448 24984 Error sending password reset email: 'EmailMultiAlternatives' object does not support item assignment
+Traceback (most recent call last):
+  File "C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py", line 106, in forgot_password
+    email_message['X-Priority'] = '3'
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+TypeError: 'EmailMultiAlternatives' object does not support item assignment

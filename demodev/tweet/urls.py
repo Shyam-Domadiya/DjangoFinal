@@ -41,4 +41,12 @@ urlpatterns = [
     path('scheduled-tweets/', views.get_scheduled_tweets, name='get_scheduled_tweets'),
     path('tweet/<int:tweet_id>/cancel-schedule/', views.cancel_scheduled_tweet, name='cancel_scheduled_tweet'),
     path('admin/publish-scheduled/', views.publish_scheduled_tweets_manual, name='publish_scheduled_tweets_manual'),
+    
+    # ========================================================================
+    # PASSWORD RESET URLS - PRODUCTION GRADE WITH HTTPS SUPPORT
+    # ========================================================================
+    path('password_reset/', views.password_reset_request, name='password_reset_request'),
+    path('password_reset_done/', views.password_reset_done, name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', views.password_reset_confirm, name='password_reset_confirm'),
+    path('reset/done/', views.password_reset_complete, name='password_reset_complete'),
 ]

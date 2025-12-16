@@ -5120,3 +5120,150 @@ INFO 2025-12-10 17:57:29,122 autoreload 2960 16240 C:\Users\shyam\OneDrive\Deskt
 INFO 2025-12-10 17:57:30,189 autoreload 16880 15552 Watching for file changes with StatReloader
 INFO 2025-12-10 17:57:35,754 autoreload 16880 15552 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
 INFO 2025-12-10 17:57:36,666 autoreload 18004 15728 Watching for file changes with StatReloader
+INFO 2025-12-16 11:14:17,829 autoreload 16200 29544 Watching for file changes with StatReloader
+INFO 2025-12-16 11:14:22,221 basehttp 16200 23244 code 400, message Bad request version ('\x02h2\x08http/1.1\x003\x04ï\x04í')
+ERROR 2025-12-16 11:14:22,229 basehttp 16200 23244 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:14:22,246 basehttp 16200 15016 code 400, message Bad request version ('lk8):øDêú7J')
+ERROR 2025-12-16 11:14:22,246 basehttp 16200 15016 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:16:07,532 basehttp 16200 17596 code 400, message Bad request version ('.{G')
+ERROR 2025-12-16 11:16:07,544 basehttp 16200 17596 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:16:07,555 basehttp 16200 21164 code 400, message Bad request version ('÷Vïå\x068\x00+\x00\x07\x06ªª\x03\x04\x03\x03\x003\x04ï\x04í')
+ERROR 2025-12-16 11:16:07,556 basehttp 16200 21164 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:16:49,144 basehttp 16200 24252 code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06Sêê\x00\x00\x00')
+ERROR 2025-12-16 11:16:49,149 basehttp 16200 24252 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:16:49,155 basehttp 16200 27880 code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x9a\x9a\x00\x00\x00\x12\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x003\x04ï\x04íÊÊ\x00\x01\x00\x11ì\x04À.i\x98vøºí¢Tðâ')
+ERROR 2025-12-16 11:16:49,156 basehttp 16200 27880 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:17:30,653 autoreload 16200 29544 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 11:17:34,103 autoreload 364 9388 Watching for file changes with StatReloader
+INFO 2025-12-16 11:17:39,849 autoreload 364 9388 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 11:17:41,866 autoreload 26220 25484 Watching for file changes with StatReloader
+INFO 2025-12-16 11:17:53,450 autoreload 8004 26848 Watching for file changes with StatReloader
+INFO 2025-12-16 11:17:58,563 basehttp 8004 15672 code 400, message Bad request version ('YêgXV{\x836ô\x13¦\x9fL±uÜ\x00')
+ERROR 2025-12-16 11:17:58,565 basehttp 8004 15672 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:17:58,571 basehttp 8004 1464 code 400, message Bad request version ('\x84Ö')
+ERROR 2025-12-16 11:17:58,571 basehttp 8004 1464 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:18:57,937 autoreload 10976 17308 Watching for file changes with StatReloader
+INFO 2025-12-16 11:19:04,566 basehttp 10976 3272 "GET / HTTP/1.1" 200 44048
+INFO 2025-12-16 11:19:05,275 basehttp 10976 12796 "GET /static/js/likes.js HTTP/1.1" 200 1704
+INFO 2025-12-16 11:19:05,281 basehttp 10976 12796 "GET /static/js/theme-toggle.js HTTP/1.1" 200 4223
+INFO 2025-12-16 11:19:05,287 basehttp 10976 3272 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 200 48697
+INFO 2025-12-16 11:19:05,287 basehttp 10976 29148 "GET /static/js/comments.js HTTP/1.1" 200 6579
+INFO 2025-12-16 11:19:05,308 basehttp 10976 29640 "GET /static/js/tweets.js HTTP/1.1" 200 5612
+INFO 2025-12-16 11:19:05,310 basehttp 10976 18764 "GET /static/js/auto-refresh.js HTTP/1.1" 200 6254
+INFO 2025-12-16 11:19:05,318 basehttp 10976 23044 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 200 270040
+WARNING 2025-12-16 11:19:05,534 log 10976 23044 Not Found: /favicon.ico
+WARNING 2025-12-16 11:19:05,535 basehttp 10976 23044 "GET /favicon.ico HTTP/1.1" 404 9735
+INFO 2025-12-16 11:22:18,543 autoreload 13160 28804 Watching for file changes with StatReloader
+INFO 2025-12-16 11:22:21,629 basehttp 13160 14352 code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+ERROR 2025-12-16 11:22:21,630 basehttp 13160 14352 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:22:21,631 basehttp 13160 18868 code 400, message Bad request version ('JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063')
+ERROR 2025-12-16 11:22:21,632 basehttp 13160 18868 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:50:49,467 autoreload 1612 16500 Watching for file changes with StatReloader
+INFO 2025-12-16 11:50:55,851 basehttp 1612 25792 code 400, message Bad request version ('w\x91ô¼Þw~\x8c\x8b*sÒ\x8e]H2@Æ\x1bëUÆ°º¼\x19p¼\x9fC§\x94\x88v')
+ERROR 2025-12-16 11:50:55,851 basehttp 1612 25792 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:50:55,854 basehttp 1612 16360 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+ERROR 2025-12-16 11:50:55,855 basehttp 1612 16360 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 11:55:05,618 autoreload 15356 19052 Watching for file changes with StatReloader
+INFO 2025-12-16 11:56:00,835 autoreload 28848 6268 Watching for file changes with StatReloader
+INFO 2025-12-16 11:56:08,250 basehttp 28848 19972 "GET / HTTP/1.1" 200 44048
+INFO 2025-12-16 11:56:08,369 basehttp 28848 19972 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,369 basehttp 28848 24568 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,432 basehttp 28848 24568 "GET /static/js/likes.js HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,438 basehttp 28848 19972 "GET /static/js/comments.js HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,438 basehttp 28848 22328 "GET /static/js/tweets.js HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,445 basehttp 28848 28020 "GET /static/js/auto-refresh.js HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:08,446 basehttp 28848 20588 "GET /static/js/theme-toggle.js HTTP/1.1" 304 0
+INFO 2025-12-16 11:56:10,833 basehttp 28848 20588 "GET /login/ HTTP/1.1" 200 30943
+INFO 2025-12-16 11:56:13,046 basehttp 28848 13180 "GET /register/ HTTP/1.1" 200 31730
+INFO 2025-12-16 11:56:15,148 basehttp 28848 13180 "GET /login/ HTTP/1.1" 200 30943
+INFO 2025-12-16 11:56:34,999 basehttp 28848 19056 "GET /password_reset/ HTTP/1.1" 200 29610
+INFO 2025-12-16 11:56:43,550 views 28848 14676 Password reset email sent to: shyamdomadiya78@gmail.com
+INFO 2025-12-16 11:56:43,551 basehttp 28848 14676 "POST /password_reset/ HTTP/1.1" 302 0
+INFO 2025-12-16 11:56:43,561 basehttp 28848 14676 "GET /password_reset_done/ HTTP/1.1" 200 31357
+INFO 2025-12-16 11:59:57,409 autoreload 28848 6268 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\urls.py changed, reloading.
+INFO 2025-12-16 11:59:58,630 autoreload 7392 4264 Watching for file changes with StatReloader
+INFO 2025-12-16 12:01:20,445 autoreload 7392 4264 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 12:01:22,865 autoreload 8060 16592 Watching for file changes with StatReloader
+INFO 2025-12-16 12:06:38,293 basehttp 8060 3152 "GET / HTTP/1.1" 200 44048
+INFO 2025-12-16 12:06:38,381 basehttp 8060 20144 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,381 basehttp 8060 3152 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,388 basehttp 8060 3152 "GET /static/js/likes.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,395 basehttp 8060 20144 "GET /static/js/comments.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,395 basehttp 8060 11712 "GET /static/js/tweets.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,398 basehttp 8060 14600 "GET /static/js/auto-refresh.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:38,399 basehttp 8060 18120 "GET /static/js/theme-toggle.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:06:45,217 basehttp 8060 18120 "GET /login/ HTTP/1.1" 200 31072
+INFO 2025-12-16 12:06:47,195 basehttp 8060 18120 "GET /register/ HTTP/1.1" 200 31730
+INFO 2025-12-16 12:07:29,314 views 8060 7484 Verification email sent to domadiyashyam0@gmail.com
+INFO 2025-12-16 12:07:29,334 basehttp 8060 7484 "POST /register/ HTTP/1.1" 200 28495
+INFO 2025-12-16 12:11:04,277 autoreload 8060 16592 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:11:05,520 autoreload 24508 3432 Watching for file changes with StatReloader
+INFO 2025-12-16 12:11:20,231 autoreload 24508 3432 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 12:11:21,359 autoreload 16212 20164 Watching for file changes with StatReloader
+INFO 2025-12-16 12:11:30,346 autoreload 16212 20164 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:11:31,227 autoreload 23368 11984 Watching for file changes with StatReloader
+INFO 2025-12-16 12:11:33,532 autoreload 23368 11984 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:11:34,381 autoreload 26160 6052 Watching for file changes with StatReloader
+INFO 2025-12-16 12:11:42,265 autoreload 26160 6052 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:11:43,834 autoreload 17744 28048 Watching for file changes with StatReloader
+INFO 2025-12-16 12:12:37,440 basehttp 17744 20980 "GET / HTTP/1.1" 200 44048
+INFO 2025-12-16 12:12:37,555 basehttp 17744 26208 "GET /media/photos/Screenshot_2025-11-24_084333.png HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,556 basehttp 17744 20980 "GET /media/photos/Screenshot_2025-11-25_215157_zA45rWG.png HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,562 basehttp 17744 20980 "GET /static/js/likes.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,568 basehttp 17744 14376 "GET /static/js/tweets.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,568 basehttp 17744 20980 "GET /static/js/theme-toggle.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,569 basehttp 17744 7672 "GET /static/js/auto-refresh.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:37,569 basehttp 17744 26208 "GET /static/js/comments.js HTTP/1.1" 304 0
+INFO 2025-12-16 12:12:39,708 basehttp 17744 23028 "GET /login/ HTTP/1.1" 200 31072
+INFO 2025-12-16 12:12:41,413 basehttp 17744 23028 "GET /forgot-password/ HTTP/1.1" 200 27351
+ERROR 2025-12-16 12:12:56,194 forgot_password_views 17744 22616 Error sending password reset email: 'EmailMultiAlternatives' object does not support item assignment
+Traceback (most recent call last):
+  File "C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py", line 107, in forgot_password
+    email_message['X-Priority'] = '3'
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+TypeError: 'EmailMultiAlternatives' object does not support item assignment
+INFO 2025-12-16 12:12:56,201 basehttp 17744 22616 "POST /forgot-password/ HTTP/1.1" 200 28137
+INFO 2025-12-16 12:13:39,539 autoreload 17744 28048 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_forms.py changed, reloading.
+INFO 2025-12-16 12:13:40,840 autoreload 14544 12672 Watching for file changes with StatReloader
+INFO 2025-12-16 12:13:46,661 autoreload 14544 12672 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:13:47,971 autoreload 4448 23220 Watching for file changes with StatReloader
+INFO 2025-12-16 12:14:48,691 basehttp 4448 12752 "GET / HTTP/1.1" 200 44048
+INFO 2025-12-16 12:14:53,103 basehttp 4448 24984 "GET /login/ HTTP/1.1" 200 31072
+INFO 2025-12-16 12:14:55,446 basehttp 4448 24984 "GET /forgot-password/ HTTP/1.1" 200 26885
+ERROR 2025-12-16 12:15:00,681 forgot_password_views 4448 24984 Error sending password reset email: 'EmailMultiAlternatives' object does not support item assignment
+Traceback (most recent call last):
+  File "C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py", line 106, in forgot_password
+    email_message['X-Priority'] = '3'
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+TypeError: 'EmailMultiAlternatives' object does not support item assignment
+INFO 2025-12-16 12:15:00,684 basehttp 4448 24984 "POST /forgot-password/ HTTP/1.1" 200 27655
+INFO 2025-12-16 12:15:31,204 autoreload 4448 23220 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\tweet\forgot_password_views.py changed, reloading.
+INFO 2025-12-16 12:15:32,988 autoreload 24948 21516 Watching for file changes with StatReloader
+INFO 2025-12-16 12:18:55,106 forgot_password_views 13220 28416 Password reset email sent to testuser@example.com
+INFO 2025-12-16 12:18:55,391 forgot_password_views 13220 28416 Password reset successful for user: testuser
+WARNING 2025-12-16 12:18:55,673 forgot_password_views 13220 28416 Invalid or expired password reset token
+WARNING 2025-12-16 12:18:55,678 forgot_password_views 13220 28416 Invalid or expired password reset token
+INFO 2025-12-16 12:23:26,891 autoreload 6384 15828 Watching for file changes with StatReloader
+INFO 2025-12-16 12:23:29,655 basehttp 6384 27084 code 400, message Bad request syntax ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03U^Ö%²k')
+ERROR 2025-12-16 12:23:29,656 basehttp 6384 27084 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:23:29,658 basehttp 6384 7312 code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÊÊ\x00\x00\x00+\x00\x07\x06')
+ERROR 2025-12-16 12:23:29,659 basehttp 6384 7312 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:23:59,492 autoreload 6384 15828 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 12:24:21,987 forgot_password_views 8108 18696 Password reset email sent to testuser@example.com
+INFO 2025-12-16 12:24:22,280 forgot_password_views 8108 18696 Password reset successful for user: testuser
+WARNING 2025-12-16 12:24:22,575 forgot_password_views 8108 18696 Invalid or expired password reset token
+WARNING 2025-12-16 12:24:22,579 forgot_password_views 8108 18696 Invalid or expired password reset token
+INFO 2025-12-16 12:26:56,176 autoreload 5172 18912 Watching for file changes with StatReloader
+INFO 2025-12-16 12:26:59,483 basehttp 5172 19596 code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x1b\x00\x03\x02\x00\x02\x00')
+ERROR 2025-12-16 12:26:59,483 basehttp 5172 19596 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:26:59,485 basehttp 5172 14576 code 400, message Bad request version ('¾\x90Ì\x02ô')
+ERROR 2025-12-16 12:26:59,486 basehttp 5172 14576 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:29:09,291 autoreload 22048 28388 Watching for file changes with StatReloader
+INFO 2025-12-16 12:29:20,970 basehttp 22048 20720 code 400, message Bad request version ('ZZ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06SÚÚ\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00#\x00\x00\x00')
+ERROR 2025-12-16 12:29:20,971 basehttp 22048 20720 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:29:20,973 basehttp 22048 2232 code 400, message Bad request version ('Zn\x9aD\x11a\x05')
+ERROR 2025-12-16 12:29:20,973 basehttp 22048 2232 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:29:25,683 basehttp 22048 752 code 400, message Bad request version ('o\x95UÃR\x93')
+ERROR 2025-12-16 12:29:25,683 basehttp 22048 752 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 12:29:25,686 basehttp 22048 11196 code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03s7')
+ERROR 2025-12-16 12:29:25,687 basehttp 22048 11196 You're accessing the development server over HTTPS, but it only supports HTTP.

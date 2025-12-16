@@ -31,6 +31,7 @@ admin.site.index_title = "Welcome"
 urlpatterns = [
     path(f'{ADMIN_PATH}/', admin.site.urls),
     path('', include('tweet.urls')),
+    path('', include('tweet.forgot_password_urls')),
     path('api/', include('tweet.api_urls')),
     path('api-auth/', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

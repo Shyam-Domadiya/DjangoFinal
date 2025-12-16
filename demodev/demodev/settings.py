@@ -144,18 +144,41 @@ LOGOUT_REDIRECT_URL = '/tweets/'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Security settings for production
-if not DEBUG:
+# ============================================================================
+# SECURITY SETTINGS FOR PRODUCTION - HTTPS SUPPORT
+# ============================================================================
+
+# HTTPS/SSL Configuration
+# Development: HTTPS disabled (Django dev server only supports HTTP)
+# Production: HTTPS enabled via environment variables
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
+
+# For production deployment (e.g., Render, Heroku)
+# Only enable HTTPS if explicitly set in environment AND not in DEBUG mode
+if not DEBUG and config('SECURE_SSL_REDIRECT', default=False, cast=bool):
+    # Enable HTTPS redirect in production
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    
+    # Security headers
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_SECURITY_POLICY = {
         "default-src": ("'self'",),
     }
-    SECURE_HSTS_SECONDS = 31536000
+    
+    # HSTS (HTTP Strict Transport Security)
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    
+    # Additional security settings
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+# Password reset token settings
+PASSWORD_RESET_TIMEOUT = 86400  # 24 hours in seconds (default is 3 days)
 
 # REST Framework configuration
 REST_FRAMEWORK = {
@@ -261,7 +284,14 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@tweetapp.com')
+SERVER_EMAIL = config('SERVER_EMAIL', default='noreply@tweetapp.com')
+
+# Email timeout
+EMAIL_TIMEOUT = 10
 
 # For production, use SMTP backend
 if not DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Password reset token timeout (24 hours in seconds)
+PASSWORD_RESET_TIMEOUT = 86400

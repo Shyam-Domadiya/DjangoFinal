@@ -1,7 +1,8 @@
 from django import forms
 from .models import Tweet, UserProfile, Media
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class TweetForm(forms.ModelForm):
     media_ids = forms.CharField(
@@ -156,3 +157,199 @@ class MediaUploadForm(forms.ModelForm):
 
 
 
+
+
+
+# ============================================================================
+# PASSWORD RESET FORMS - PRODUCTION GRADE WITH HTTPS SUPPORT
+# ============================================================================
+
+class CustomPasswordResetForm(PasswordResetForm):
+    """
+    Custom password reset form with enhanced validation and security.
+    Supports HTTPS protocol for secure password reset links.
+    """
+    email = forms.EmailField(
+        label="Email Address",
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your registered email address',
+            'autocomplete': 'email',
+            'required': True,
+        })
+    )
+    
+    def clean_email(self):
+        """Validate email exists in the system"""
+        email = self.cleaned_data.get('email')
+        
+        if not email:
+            raise ValidationError('Email address is required.')
+        
+        # Check if user with this email exists
+        if not User.objects.filter(email=email).exists():
+            raise ValidationError(
+                'No user account found with this email address. '
+                'Please check and try again or register a new account.'
+            )
+        
+        return email
+    
+    def save(self, request, **kwargs):
+        """
+        Generate password reset email with HTTPS support.
+        
+        Args:
+            request: Django request object (used to determine protocol)
+            **kwargs: Additional arguments
+        
+        Returns:
+            Email address of the user
+        """
+        email = self.cleaned_data["email"]
+        
+        try:
+            user = User.objects.get(email=email)
+            
+            # Import here to avoid circular imports
+            from django.contrib.auth.tokens import default_token_generator
+            from django.utils.http import urlsafe_base64_encode
+            from django.utils.encoding import force_bytes
+            from django.template.loader import render_to_string
+            from django.core.mail import EmailMessage
+            from django.conf import settings
+            
+            # Generate secure token and encoded UID
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            
+            # Determine protocol (HTTPS or HTTP)
+            protocol = 'https' if request.is_secure() else 'http'
+            domain = request.get_host()
+            
+            # Build password reset link with HTTPS support
+            reset_link = f"{protocol}://{domain}/reset/{uid}/{token}/"
+            
+            # Prepare email context
+            context = {
+                'user': user,
+                'reset_link': reset_link,
+                'protocol': protocol,
+                'domain': domain,
+                'uid': uid,
+                'token': token,
+            }
+            
+            # Render email template
+            subject = "🔐 Reset Your FlexiBrain Password"
+            message = render_to_string(
+                'password/password_reset_email.html',
+                context
+            )
+            
+            # Send email
+            email_message = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[user.email],
+            )
+            email_message.content_subtype = 'html'  # Send as HTML email
+            email_message.send(fail_silently=False)
+            
+            return email
+        
+        except User.DoesNotExist:
+            # Silently fail for security (don't reveal if email exists)
+            return email
+        except Exception as e:
+            # Log the error but don't expose details to user
+            import logging
+            logger = logging.getLogger('tweet')
+            logger.error(f"Error sending password reset email: {str(e)}", exc_info=True)
+            raise ValidationError(
+                'An error occurred while sending the password reset email. '
+                'Please try again later.'
+            )
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    """
+    Custom set password form with enhanced validation and security.
+    Used after user clicks the password reset link.
+    """
+    new_password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your new password',
+            'autocomplete': 'new-password',
+            'required': True,
+        }),
+        help_text='Password must be at least 8 characters long.'
+    )
+    
+    new_password2 = forms.CharField(
+        label="Confirm Password",
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Confirm your new password',
+            'autocomplete': 'new-password',
+            'required': True,
+        })
+    )
+    
+    def clean_new_password1(self):
+        """Validate new password strength"""
+        password = self.cleaned_data.get('new_password1')
+        
+        if not password:
+            raise ValidationError('Password is required.')
+        
+        if len(password) < 8:
+            raise ValidationError('Password must be at least 8 characters long.')
+        
+        # Check for at least one uppercase letter
+        if not any(char.isupper() for char in password):
+            raise ValidationError('Password must contain at least one uppercase letter.')
+        
+        # Check for at least one lowercase letter
+        if not any(char.islower() for char in password):
+            raise ValidationError('Password must contain at least one lowercase letter.')
+        
+        # Check for at least one digit
+        if not any(char.isdigit() for char in password):
+            raise ValidationError('Password must contain at least one number.')
+        
+        # Check for at least one special character
+        special_chars = '!@#$%^&*()_+-=[]{}|;:,.<>?'
+        if not any(char in special_chars for char in password):
+            raise ValidationError('Password must contain at least one special character (!@#$%^&*).')
+        
+        return password
+    
+    def clean_new_password2(self):
+        """Validate password confirmation"""
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError('The passwords do not match. Please try again.')
+        
+        return password2
+    
+    def save(self, commit=True):
+        """Save the new password"""
+        user = super().save(commit=False)
+        
+        if commit:
+            user.save()
+            
+            # Log password change
+            import logging
+            logger = logging.getLogger('tweet')
+            logger.info(f"Password reset successful for user: {user.username}", extra={'user_id': user.id})
+        
+        return user
