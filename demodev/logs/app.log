@@ -1,0 +1,15 @@
+INFO 2025-12-16 14:09:46,066 autoreload 25920 22836 Watching for file changes with StatReloader
+INFO 2025-12-16 14:09:58,192 basehttp 25920 21428 code 400, message Bad request version ('\x00\x02\x01\x00\x00+\x00\x07\x06**\x03\x04\x03\x03ÿ\x01\x00\x01\x00\x00')
+ERROR 2025-12-16 14:09:58,193 basehttp 25920 21428 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:09:58,197 basehttp 25920 25120 code 400, message Bad request version ('\x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S')
+ERROR 2025-12-16 14:09:58,197 basehttp 25920 25120 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:10:00,260 basehttp 25920 10844 code 400, message Bad request version ('\x05#\x8f')
+ERROR 2025-12-16 14:10:00,261 basehttp 25920 10844 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:10:00,264 basehttp 25920 3152 code 400, message Bad request version ('\x02h2\x08http/1.1\x00\x1b\x00\x03\x02\x00\x02\x00\x17\x00\x00\x00')
+ERROR 2025-12-16 14:10:00,265 basehttp 25920 3152 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:10:00,265 basehttp 25920 18840 code 400, message Bad request version ("éz\x01z_ï\x82YgÑ1þ,t\x8c'#8´»!Æ¿\x9cG´")
+ERROR 2025-12-16 14:10:00,265 basehttp 25920 18840 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:10:00,269 basehttp 25920 10956 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+ERROR 2025-12-16 14:10:00,270 basehttp 25920 10956 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:12:13,777 autoreload 25920 22836 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 14:12:15,321 autoreload 25424 3628 Watching for file changes with StatReloader

@@ -151,14 +151,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # HTTPS/SSL Configuration
 # Development: HTTPS disabled (Django dev server only supports HTTP)
 # Production: HTTPS enabled via environment variables
-SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
-SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
-CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
 
-# For production deployment (e.g., Render, Heroku)
-# Only enable HTTPS if explicitly set in environment AND not in DEBUG mode
-if not DEBUG and config('SECURE_SSL_REDIRECT', default=False, cast=bool):
-    # Enable HTTPS redirect in production
+if DEBUG:
+    # DEVELOPMENT MODE - HTTP ONLY
+    # Disable all HTTPS redirects and secure cookies
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_BROWSER_XSS_FILTER = False
+    SECURE_HSTS_SECONDS = 0
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
+else:
+    # PRODUCTION MODE - HTTPS ONLY
+    # Enable HTTPS redirect and secure cookies
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -174,7 +180,7 @@ if not DEBUG and config('SECURE_SSL_REDIRECT', default=False, cast=bool):
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     
-    # Additional security settings
+    # Additional security settings for reverse proxy
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
 # Password reset token settings
