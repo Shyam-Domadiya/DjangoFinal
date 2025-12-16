@@ -3,8 +3,8 @@ services:
     name: twitter-dm-app
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt && cd demodev && python manage.py collectstatic --noinput && python manage.py migrate
-    startCommand: cd demodev && gunicorn demodev.wsgi:application
+    buildCommand: pip install -r DjangoFinal/demodev/requirements.txt && python DjangoFinal/demodev/manage.py collectstatic --noinput && python DjangoFinal/demodev/manage.py migrate
+    startCommand: cd DjangoFinal/demodev && gunicorn demodev.wsgi:application
     envVars:
       - key: DEBUG
         value: "False"
