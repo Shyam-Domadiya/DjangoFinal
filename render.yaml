@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: twitter-dm-app
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python demodev/manage.py collectstatic --noinput && python demodev/manage.py migrate
+    startCommand: gunicorn --chdir demodev demodev.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: twitter-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: "tweetapp-wn3f.onrender.com,*.onrender.com,localhost,127.0.0.1"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+      - key: SESSION_COOKIE_SECURE
+        value: "True"
+      - key: CSRF_COOKIE_SECURE
+        value: "True"
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        value: ""
+      - key: EMAIL_HOST_PASSWORD
+        value: ""
+      - key: DEFAULT_FROM_EMAIL
+        value: ""
+
+databases:
+  - name: twitter-db
+    databaseName: twitter_db
+    user: twitter_user
+    plan: free

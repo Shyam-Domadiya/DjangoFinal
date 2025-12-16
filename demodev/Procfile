@@ -1,2 +1,0 @@
-web: cd DjangoFinal/demodev && gunicorn demodev.wsgi:application
-release: cd DjangoFinal/demodev && python manage.py migrate
