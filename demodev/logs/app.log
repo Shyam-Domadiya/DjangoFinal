@@ -13,3 +13,23 @@ INFO 2025-12-16 14:10:00,269 basehttp 25920 10956 code 400, message Bad request 
 ERROR 2025-12-16 14:10:00,270 basehttp 25920 10956 You're accessing the development server over HTTPS, but it only supports HTTP.
 INFO 2025-12-16 14:12:13,777 autoreload 25920 22836 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
 INFO 2025-12-16 14:12:15,321 autoreload 25424 3628 Watching for file changes with StatReloader
+INFO 2025-12-16 14:13:17,647 basehttp 25424 11740 code 400, message Bad request version ('àJ³õò\x13¿(°Ã\\\x06ûàxùe\x02¦')
+ERROR 2025-12-16 14:13:17,648 basehttp 25424 11740 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:17,651 basehttp 25424 13192 code 400, message Bad request version ('}pª')
+ERROR 2025-12-16 14:13:17,651 basehttp 25424 13192 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:19,358 basehttp 25424 28732 code 400, message Bad request version ('ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063ÊÊ\x00\x00ÿ\x01\x00\x01\x00\x00')
+ERROR 2025-12-16 14:13:19,359 basehttp 25424 28732 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:19,361 basehttp 25424 29948 code 400, message Bad request version ('Äµ6ªKu`i\x8bhª¡\x8cXQ´l\x02Ì9ÄD»ßÕ\x9f\x12D')
+ERROR 2025-12-16 14:13:19,362 basehttp 25424 29948 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:19,365 basehttp 25424 6728 code 400, message Bad request version ('JJ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063ÚÚ\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00')
+ERROR 2025-12-16 14:13:19,366 basehttp 25424 6728 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:19,373 basehttp 25424 14376 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00')
+ERROR 2025-12-16 14:13:19,374 basehttp 25424 14376 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:32,821 autoreload 1984 4484 Watching for file changes with StatReloader
+INFO 2025-12-16 14:13:42,885 basehttp 1984 22132 code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04íúú\x00\x01\x00\x11ì\x04Àå$n\x04ôD¦w\x16{Ô\x8a×W²k9\x1beâs\x0f\x90SåBc/{±r82V\x893º$i©ùÀ`\x96\x99')
+ERROR 2025-12-16 14:13:42,886 basehttp 1984 22132 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:13:42,891 basehttp 1984 28460 code 400, message Bad request version ('ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s')
+ERROR 2025-12-16 14:13:42,891 basehttp 1984 28460 You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-16 14:19:47,606 autoreload 1984 4484 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.
+INFO 2025-12-16 14:19:49,954 autoreload 6504 17464 Watching for file changes with StatReloader
+INFO 2025-12-16 14:20:04,454 autoreload 6504 17464 C:\Users\shyam\OneDrive\Desktop\Internship Tasks\09-12-25 to 12-12-25\DjangoFinal\demodev\demodev\settings.py changed, reloading.

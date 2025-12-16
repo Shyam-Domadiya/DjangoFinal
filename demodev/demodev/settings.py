@@ -129,12 +129,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+# Only add STATICFILES_DIRS if the directory exists
+static_dir = os.path.join(BASE_DIR, 'static')
+if os.path.exists(static_dir):
+    STATICFILES_DIRS = [static_dir]
+else:
+    STATICFILES_DIRS = []
+
+# Use WhiteNoise for efficient static file serving in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'login'
 
@@ -223,19 +232,25 @@ CACHES = {
 }
 
 # Logging configuration
-# For production (Render), use console only. For development, use file logging.
+# Production-ready logging with structured output for better debugging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'format': '[{levelname}] {asctime} {name} {funcName}:{lineno} - {message}',
             'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
         'simple': {
-            'format': '{levelname} {asctime} {module} {message}',
+            'format': '[{levelname}] {asctime} {name} - {message}',
             'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
         },
+        'json': {
+            '()': 'pythonjsonlogger.jsonlogger.JsonFormatter',
+            'format': '%(asctime)s %(name)s %(levelname)s %(message)s'
+        } if 'pythonjsonlogger' in str(INSTALLED_APPS) else None,
     },
     'filters': {
         'require_debug_false': {
@@ -244,12 +259,27 @@ LOGGING = {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
+        'skip_health_checks': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': lambda record: '/health' not in record.getMessage() and 'Go-http-client' not in record.getMessage(),
+        },
     },
     'handlers': {
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'simple'
+            'formatter': 'simple',
+            'filters': ['skip_health_checks'],
+        },
+        'console_verbose': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'error_console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
     },
     'loggers': {
@@ -258,9 +288,24 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'tweet': {
+        'django.request': {
+            'handlers': ['console_verbose'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        'django.db.backends': {
             'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'tweet': {
+            'handlers': ['console_verbose', 'error_console'],
             'level': 'DEBUG',
+            'propagate': False,
+        },
+        'gunicorn.access': {
+            'handlers': ['console'],
+            'level': 'INFO',
             'propagate': False,
         },
     },
@@ -286,7 +331,8 @@ if DEBUG:
         'formatter': 'verbose',
     }
     LOGGING['loggers']['django']['handlers'] = ['console', 'file']
-    LOGGING['loggers']['tweet']['handlers'] = ['console', 'file', 'error_file']
+    LOGGING['loggers']['django.request']['handlers'] = ['console_verbose', 'error_file']
+    LOGGING['loggers']['tweet']['handlers'] = ['console_verbose', 'file', 'error_file']
 
 
 # ============================================================================
